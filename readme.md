@@ -4,10 +4,10 @@ Linked Data Instance Matching Benchmark
 
 ###Description
 
-The Linked Data Instance Matching Benchmark (LDIMBENCH), is a
+The Linked Data Instance Matching Benchmark (LANCE), is a
 benchmark for the assessment of Instance Matching techniques and
 systems for Linked Data data that are accompanied by a schema.
-Essentially, LDIMBENCH implements:
+Essentially, LANCE implements:
 
 (i) a set of test cases based on structural, semantic and value
 transformations
@@ -17,7 +17,7 @@ discover, and
 
 (iii) evaluation metrics. 
 
-LDIMBENCH accepts as input ontologies and source datasets expressed in
+LANCE accepts as input ontologies and source datasets expressed in
 different formats (is able to load all RDF serialization formats that the triplestore supports
 such as RDF/XML, N3, NT, TTL, etc.) and generates a target dataset and gold standard
 files (in any preselected format, as well as the format specified by OAEI).
@@ -33,8 +33,8 @@ ant build
 ```
 
 Result of the build process is saved to the distribution folder (dist/) : 
-* ldimbench-base.jar
-* ldimbench-base.zip
+* lance-base.jar
+* lance-base.zip
 * definitions.properties
 * test.properties
 * readme.txt
@@ -79,8 +79,8 @@ Required configuration files :
   * ***changeURIs*** - Boolean variable in order to change the given URIs or not. We do not follow this in the case of functional and inverse functional property transformations.
   * ***newURInamespace*** - Namespace for new URIs (e.g http://www.ldbc.eu/)
   * ***transformClassInstances*** - Instances of classes we want to retrieve from database (e.g. http://dbpedia.org/ontology/Event, http://dbpedia.org/ontology/Place,http://dbpedia.org/ontology/Organisation). Separate classes with comma.If this remains empty random instances will be retrieved until totalTriples.
-  * ***endpointURL*** - Endpoint URL for OWLIM (e.g. http://localhost:8080/openrdf-sesame/repositories/ldimbench)
-  * ***endpointUpdateURL*** - Endpoint update URL for OWLIM (e.g. http://localhost:8080/openrdf-sesame/repositories/ldimbench/statements)
+  * ***endpointURL*** - Endpoint URL for OWLIM (e.g. http://localhost:8080/openrdf-sesame/repositories/lance)
+  * ***endpointUpdateURL*** - Endpoint update URL for OWLIM (e.g. http://localhost:8080/openrdf-sesame/repositories/lance/statements)
   * ***loadOntologies*** - Load ontologies (from the 'datasets_and_ontologies/ontologies' folder (ontologiesPath)) into database
   * ***loadReferenceDatasets*** - Load datasets (from the 'datasets_and_ontologies/datasets' folder (referenceDatasetsPath)) into database
   * ***clearDatabase*** - The benchmark can be set to clear all data from database. Note : all data will be erased from repository
@@ -99,6 +99,6 @@ INVERSEFUNCTIONALPROPERTY, NOTRANSFORMATION, (e.g. complexCombinationForSemantic
 ###Run
 
 ```sh
-java -jar ldimbench-base.jar test.properties
+java -jar lance-base.jar test.properties
 ```
 *Note: appropriate value for java maximum heap size may be required, e.g. -Xmx8G*

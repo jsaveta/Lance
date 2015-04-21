@@ -1,13 +1,13 @@
-Linked Data Instance Matching Benchmark (LDIMBENCH)
+Linked Data Instance Matching Benchmark (LANCE)
 
 Description : 
 
 -------------------------------------------------------------------------
 
-The Linked Data Instance Matching Benchmark (LDIMBENCH), is a
+The Linked Data Instance Matching Benchmark (LANCE), is a
 benchmark for the assessment of Instance Matching techniques and
 systems for Linked Data data that are accompanied by a schema.
-Essentially, LDIMBENCH implements:
+Essentially, LANCE implements:
 
 (i) a set of test cases based on structure, semantic and value
 transformations
@@ -17,7 +17,7 @@ discover, and
 
 (iii) evaluation metrics. 
 
-LDIMBENCH accepts as input ontologies and source datasets expressed in
+LANCE accepts as input ontologies and source datasets expressed in
 different formats (is able to load all RDF serialization formats that the triplestore supports
 such as RDF/XML, N3, NT, TTL, etc.) and generates a target dataset and gold standard
 files (in any preselected format, as well as the format specified by OAEI).
@@ -25,7 +25,7 @@ files (in any preselected format, as well as the format specified by OAEI).
 Distribution : 
 -------------------------------------------------------------------------
 
-The benchmark test driver is distributed as a jar file : ldimbench-base.jar.
+The benchmark test driver is distributed as a jar file : lance-base.jar.
 
 In the datasets_and_ontologies/datasets folder the user must place
 the reference datasets and in the datasets_and_ontologies/ontologies
@@ -123,10 +123,10 @@ Benchmark Phases :
 													  If this field remains empty random instances will be retrieved until totalTriples.
 
 - endpointURL: Endpoint URL for OWLIM
-  (e.g. http://localhost:8080/openrdf-sesame/repositories/ldimbench)
+  (e.g. http://localhost:8080/openrdf-sesame/repositories/lance)
 
 - endpointUpdateURL: Endpoint update URL for OWLIM
-  (e.g. http://localhost:8080/openrdf-sesame/repositories/ldimbench/statements)
+  (e.g. http://localhost:8080/openrdf-sesame/repositories/lance/statements)
 
 - loadOntologies: load ontologies (from the
   'datasets_and_ontologies/ontologies' folder (ontologiesPath)) into
@@ -217,7 +217,7 @@ Sample definitions.properties file can be found in the distribution
 jar file.
 
   * Example benchmark run command : 
-  	  java -jar ldimbench-base.jar test.properties
+  	  java -jar lance-base.jar test.properties
   	  Note: appropriate value for java maximum heap size may be required, e.g. -Xmx8G
 
 RESCAL:
@@ -225,7 +225,7 @@ RESCAL:
 
 The required dependencies for RESCAL are Numpy >= 1.3, SciPy >= 0.7 and Python
 
-LDIMBENCH generates : n3, turtle, n-triples
+LANCE generates : n3, turtle, n-triples
 
 The semantics-aware transformations that are done when complex transformations are chosen refer to class changes.
 
