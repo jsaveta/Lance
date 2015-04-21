@@ -1,0 +1,146 @@
+
+<http://www.bbc.co.uk/things/1247083833#id> a <http://www.bbc.co.uk/ontologies/creativework/NewsItem> ;
+	<http://www.bbc.co.uk/ontologies/creativework/title> "United Kingdom the day something effects meant in diagnose power amounts mainly." ;
+	<http://www.bbc.co.uk/ontologies/creativework/shortTitle> " layout common equal payment pressure individual's first took weak amateur." ;
+	<http://www.bbc.co.uk/ontologies/creativework/category> <http://www.bbc.co.uk/ontologies/coreconcepts/Event> ;
+	<http://www.bbc.co.uk/ontologies/creativework/description> " being historically browser pursuit internal software apartheid have seen that or supported faster demolition servers considered visit concerned competitive complete amateur turn terms principle combined." ;
+	<http://www.bbc.co.uk/ontologies/creativework/about> <http://dbpedia.org/resource/British_Comic_Art_Convention> , <http://dbpedia.org/resource/Gary_Guglielmi> , <http://news.bbc.co.uk/democracylive/hi/representatives/profiles/37676.stm> , <http://dbpedia.org/resource/Thomas_Finney> , <http://dbpedia.org/resource/1968_South_African_Grand_Prix> ;
+	<http://www.bbc.co.uk/ontologies/creativework/mentions> <http://sws.geonames.org/2635836/> ;
+	<http://www.bbc.co.uk/ontologies/creativework/audience> <http://www.bbc.co.uk/ontologies/creativework/NationalAudience> ;
+	<http://www.bbc.co.uk/ontologies/creativework/liveCoverage> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
+	<http://www.bbc.co.uk/ontologies/creativework/primaryFormat> <http://www.bbc.co.uk/ontologies/creativework/TextualFormat> , <http://www.bbc.co.uk/ontologies/creativework/InteractiveFormat> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateCreated> "2011-04-06T08:02:07.905+03:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateModified> "2011-10-15T20:14:53.289+03:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/thumbnail> <http://www.bbc.co.uk/thumbnail/1062620462> ;
+	<http://www.bbc.co.uk/ontologies/creativework/altText> "thumbnail atlText for CW http://www.bbc.co.uk/context/9#id" .
+
+<http://www.bbc.co.uk/things/9#id> <http://www.bbc.co.uk/ontologies/bbc/primaryContentOf> <http://www.bbc.co.uk/things/1320659408#id> .
+
+<http://www.bbc.co.uk/things/1320659408#id> <http://www.bbc.co.uk/ontologies/bbc/webDocumentType> <http://www.bbc.co.uk/ontologies/bbc/Mobile> ;
+	<http://www.bbc.co.uk/ontologies/bbc/ProductType> <http://dbpedia.org/resource/Carom_billiards> .
+
+<http://dbpedia.org/resource/Carom_billiards> a <http://www.bbc.co.uk/ontologies/coreconcepts/Sport> ;
+	<http://www.w3.org/2000/01/rdf-schema#comment> "Carom billiards, sometimes called carambole billiards or simply carambole (and in some cases used as a synonym for the game of straight rail from which many carom games derive), is the overarching title of a family of billiards games generally played on cloth-covered, 5 by 10feet (approximately 1.5  3m) pocketless tables, which often feature heated slate beds." ;
+	<http://dbpedia.org/property/caption> "A carom billiard table and billiard balls" ;
+	<http://dbpedia.org/property/equipment> <http://dbpedia.org/resource/Billiard_table> ;
+	<http://dbpedia.org/property/olympic> "Proposed for 2010" ;
+	<http://dbpedia.org/property/team> "Single opponents, doubles or teams" .
+
+<http://www.bbc.co.uk/things/1320659408#id> <http://www.bbc.co.uk/ontologies/coreconcepts/primaryTopic> <http://dbpedia.org/resource/Gary_Guglielmi> .
+
+<http://dbpedia.org/resource/Gary_Guglielmi> a <http://xmlns.com/foaf/0.1/Person> ;
+	<http://xmlns.com/foaf/0.1/name> "Gary Graham Christopher Guglielmi" ;
+	<http://xmlns.com/foaf/0.1/surname> "Guglielmi" ;
+	<http://xmlns.com/foaf/0.1/givenName> "Gary Graham Christopher" ;
+	<http://purl.org/dc/elements/1.1/description> "Australian speedway rider" ;
+	<http://dbpedia.org/ontology/birthDate> "1958-02-14"^^<http://www.w3.org/2001/XMLSchema#date> .
+
+<http://www.bbc.co.uk/things/1260649151#id> a <http://www.bbc.co.uk/ontologies/creativework/CreativeWork> ;
+	<http://www.bbc.co.uk/ontologies/creativework/title> "Laurence Robertson olympic cookie progress appear within power viewers been player others." ;
+	<http://www.bbc.co.uk/ontologies/creativework/shortTitle> " medieval activity personally ceased certain day refused partisan representation ceased." ;
+	<http://www.bbc.co.uk/ontologies/creativework/category> <http://www.bbc.co.uk/category/PoliticsPersonsAdditional> ;
+	<http://www.bbc.co.uk/ontologies/creativework/description> " politics grassroots as automatically million was automatically personalize terms retain using." ;
+	<http://www.bbc.co.uk/ontologies/creativework/tag> <http://www.wikidata.org/wiki/Q480148> , <http://dbpedia.org/resource/Warnow> , <http://dbpedia.org/resource/United_States_Senate_election_in_New_Mexico,_2000> ;
+	<http://www.bbc.co.uk/ontologies/creativework/mentions> <http://sws.geonames.org/7299226/> ;
+	<http://www.bbc.co.uk/ontologies/creativework/audience> <http://www.bbc.co.uk/ontologies/creativework/NationalAudience> ;
+	<http://www.bbc.co.uk/ontologies/creativework/liveCoverage> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
+	<http://www.bbc.co.uk/ontologies/creativework/primaryFormat> <http://www.bbc.co.uk/ontologies/creativework/TextualFormat> , <http://www.bbc.co.uk/ontologies/creativework/InteractiveFormat> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateCreated> "2011-08-08T07:14:45.162+03:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateModified> "2011-09-10T02:05:32.082+03:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/thumbnail> <http://www.bbc.co.uk/thumbnail/1104400783> ;
+	<http://www.bbc.co.uk/ontologies/creativework/altText> "thumbnail atlText for CW http://www.bbc.co.uk/context/10#id" ;
+	<http://www.bbc.co.uk/ontologies/bbc/primaryContentOf> <http://www.bbc.co.uk/things/2103651521#id> .
+
+<http://www.bbc.co.uk/things/2103651521#id> <http://www.bbc.co.uk/ontologies/bbc/webDocumentType> <http://www.bbc.co.uk/ontologies/bbc/Mobile> ;
+	<http://www.bbc.co.uk/ontologies/bbc/ProductType> <http://www.bbc.co.uk/ontologies/bbc/News> ;
+	<http://www.bbc.co.uk/ontologies/coreconcepts/primaryTopic> <http://dbpedia.org/resource/Warnow> .
+
+<http://dbpedia.org/resource/Warnow> a <http://www.bbc.co.uk/ontologies/coreconcepts/Thing> ;
+	<http://xmlns.com/foaf/0.1/name> "Warnow" ;
+	<http://www.w3.org/2000/01/rdf-schema#comment> "The Warnow is a river in the state of Mecklenburg-Vorpommern in Germany. It flows into the Baltic Sea near the town of Rostock, in its borough WarnemΓΌnde. The source of the Warnow is in Grebbin, a small village 10Β km north of Parchim, at the western end of the Mecklenburg Lake District. It flows north through Sternberg, BΓΌtzow and Schwaan before reaching Rostock." ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#geometry> "POINT(12.0922 54.1817)" .
+
+<http://www.bbc.co.uk/things/251937907#id> a <http://www.bbc.co.uk/ontologies/creativework/NewsItem> ;
+	<http://www.bbc.co.uk/ontologies/creativework/title> "United States domain ceased approach amassed guaranteeing refuse where easier commerce money." ;
+	<http://www.bbc.co.uk/ontologies/creativework/shortTitle> " not royal they been land took accept official early war." ;
+	<http://www.bbc.co.uk/ontologies/creativework/category> <http://www.bbc.co.uk/ontologies/coreconcepts/Event> ;
+	<http://www.bbc.co.uk/ontologies/creativework/description> " components these without legislation integrity data pressure representative other broadcasters web reporting took cases originate enable first patterns elaborate domestic browsing show affords." ;
+	<http://www.bbc.co.uk/ontologies/creativework/about> <http://dbpedia.org/resource/1970_United_States_Grand_Prix> , <http://dbpedia.org/resource/Duchy_of_Carinthia> ;
+	<http://www.bbc.co.uk/ontologies/creativework/mentions> <http://sws.geonames.org/7294402/> ;
+	<http://www.bbc.co.uk/ontologies/creativework/audience> <http://www.bbc.co.uk/ontologies/creativework/NationalAudience> ;
+	<http://www.bbc.co.uk/ontologies/creativework/liveCoverage> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
+	<http://www.bbc.co.uk/ontologies/creativework/primaryFormat> <http://www.bbc.co.uk/ontologies/creativework/TextualFormat> , <http://www.bbc.co.uk/ontologies/creativework/InteractiveFormat> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateCreated> "2011-09-13T22:19:46.259+03:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateModified> "2012-04-04T11:48:17.209+03:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/thumbnail> <http://www.bbc.co.uk/thumbnail/963897407> ;
+	<http://www.bbc.co.uk/ontologies/creativework/altText> "thumbnail atlText for CW http://www.bbc.co.uk/context/11#id" .
+
+<http://www.bbc.co.uk/things/11#id> <http://www.bbc.co.uk/ontologies/bbc/primaryContentOf> <http://www.bbc.co.uk/things/644096401#id> .
+
+<http://www.bbc.co.uk/things/644096401#id> <http://www.bbc.co.uk/ontologies/bbc/webDocumentType> <http://www.bbc.co.uk/ontologies/bbc/HighWeb> ;
+	<http://www.bbc.co.uk/ontologies/bbc/ProductType> <http://dbpedia.org/resource/American_football> .
+
+<http://dbpedia.org/resource/American_football> <http://www.w3.org/2000/01/rdf-schema#comment> "American football, known in the United States as football, is a team sport. It is played by two teams, eleven players to a side, who advance an oval ball over a rectangular field that is 120 yards long by 53.3 yards wide and has goalposts at both ends. The team in possession of the ball (the offense) attempts to advance down the field by running with or passing the ball. To continue their drive, the offense must advance the ball at least 10 yards down the field in a series of four downs." ;
+	<http://dbpedia.org/property/caption> "Larry Fitzgerald catches a pass at the 2009 Pro Bowl" ;
+	<http://dbpedia.org/property/equipment> <http://dbpedia.org/resource/Football_helmet> ;
+	<http://dbpedia.org/property/olympic> "No; demonstrated at the 1932 Summer Olympics" ;
+	<http://dbpedia.org/property/team> "Both teams can substitute players freely between downs" .
+
+<http://www.bbc.co.uk/things/644096401#id> <http://www.bbc.co.uk/ontologies/coreconcepts/primaryTopic> <http://dbpedia.org/resource/Duchy_of_Carinthia> .
+
+<http://dbpedia.org/resource/Duchy_of_Carinthia> a <http://www.w3.org/2002/07/owl#Thing> ;
+	<http://xmlns.com/foaf/0.1/name> "Herzogtum KΓ¤rnten (de)" ;
+	<http://www.w3.org/2000/01/rdf-schema#comment> "The Duchy of Carinthia was a duchy located in southern Austria and parts of northern Slovenia. It was separated from the Duchy of Bavaria in 976, and was the first newly created Imperial State beside the original German stem duchies. Carinthia remained a part of the Holy Roman Empire until its dissolution in 1806, and a crownland of Austria-Hungary until 1918. By the Carinthian Plebiscite in October 1920, the main area of the duchy formed the Austrian state of Carinthia.,," .
+
+<http://www.bbc.co.uk/things/948637293#id> a <http://www.bbc.co.uk/ontologies/creativework/NewsItem> ;
+	<http://www.bbc.co.uk/ontologies/creativework/title> "Ronnie Campbell cookies approach town object search administration exist historically pages realm." ;
+	<http://www.bbc.co.uk/ontologies/creativework/shortTitle> " administer basis usage court progress countries local democratic impact were." ;
+	<http://www.bbc.co.uk/ontologies/creativework/category> <http://www.bbc.co.uk/category/PoliticsPersonsAdditional> ;
+	<http://www.bbc.co.uk/ontologies/creativework/description> " took so state faster referral machinery territorial reject browsing worst demographic weak equality following layout spectators who complete additionally states ads layout as." ;
+	<http://www.bbc.co.uk/ontologies/creativework/about> <http://dbpedia.org/resource/Ronnie_Campbell> , <http://dbpedia.org/resource/Okreek,_South_Dakota> , <http://dbpedia.org/resource/1991_British_Grand_Prix> ;
+	<http://www.bbc.co.uk/ontologies/creativework/mentions> <http://sws.geonames.org/7296275/> ;
+	<http://www.bbc.co.uk/ontologies/creativework/audience> <http://www.bbc.co.uk/ontologies/creativework/NationalAudience> ;
+	<http://www.bbc.co.uk/ontologies/creativework/liveCoverage> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
+	<http://www.bbc.co.uk/ontologies/creativework/primaryFormat> <http://www.bbc.co.uk/ontologies/creativework/TextualFormat> , <http://www.bbc.co.uk/ontologies/creativework/InteractiveFormat> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateCreated> "2011-03-09T10:30:19.095+02:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateModified> "2011-05-26T16:51:21.621+03:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/thumbnail> <http://www.bbc.co.uk/thumbnail/1504204789> ;
+	<http://www.bbc.co.uk/ontologies/creativework/altText> "thumbnail atlText for CW http://www.bbc.co.uk/context/12#id" .
+
+<http://www.bbc.co.uk/things/12#id> <http://www.bbc.co.uk/ontologies/bbc/primaryContentOf> <http://www.bbc.co.uk/things/1380157102#id> .
+
+<http://www.bbc.co.uk/things/1380157102#id> <http://www.bbc.co.uk/ontologies/bbc/webDocumentType> <http://www.bbc.co.uk/ontologies/bbc/HighWeb> ;
+	<http://www.bbc.co.uk/ontologies/bbc/ProductType> <http://www.bbc.co.uk/ontologies/bbc/Blogs> ;
+	<http://www.bbc.co.uk/ontologies/coreconcepts/primaryTopic> <http://www.bbc.co.uk/ontologies/coreconcepts/Okreek,_South_Dakota> .
+
+<http://www.bbc.co.uk/ontologies/coreconcepts/Okreek,_South_Dakota> a <http://www.bbc.co.uk/ontologies/coreconcepts/Place> ;
+	<http://xmlns.com/foaf/0.1/name> "Okreek" ;
+	<http://www.w3.org/2000/01/rdf-schema#comment> "Okreek is an unincorporated community in Todd County, South Dakota, United States. As of the 2010 Census, the population was 269. The town is wholly within the jurisdiction of the Rosebud Indian Reservation, and the populace is almost entirely Sioux-American. Okreek consists primarily of two long blocks of inhabited tract housing, and has about 30 private telephone subscribers within town limits. There is also an elementary school and a Post Office which has been assigned the ZIP Code of 57563." ;
+	<http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/United_States> ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#geometry> "POINT(-100.386 43.3622)" .
+
+<http://www.bbc.co.uk/things/12#id> a <http://www.bbc.co.uk/ontologies/creativework/NewsItem> ;
+	<http://www.bbc.co.uk/ontologies/creativework/title> "Ronnie Campbell cookies approach town object search administration exist historically pages realm." ;
+	<http://www.bbc.co.uk/ontologies/creativework/shortTitle> " administer basis usage court progress countries local democratic impact were." ;
+	<http://www.bbc.co.uk/ontologies/creativework/category> <http://www.bbc.co.uk/category/PoliticsPersonsAdditional> ;
+	<http://www.bbc.co.uk/ontologies/creativework/description> " took so state faster referral machinery territorial reject browsing worst demographic weak equality following layout spectators who complete additionally states ads layout as." ;
+	<http://www.bbc.co.uk/ontologies/creativework/about> <http://dbpedia.org/resource/Ronnie_Campbell> , <http://dbpedia.org/resource/Okreek,_South_Dakota> , <http://dbpedia.org/resource/1991_British_Grand_Prix> ;
+	<http://www.bbc.co.uk/ontologies/creativework/mentions> <http://sws.geonames.org/7296275/> ;
+	<http://www.bbc.co.uk/ontologies/creativework/audience> <http://www.bbc.co.uk/ontologies/creativework/NationalAudience> ;
+	<http://www.bbc.co.uk/ontologies/creativework/liveCoverage> "false"^^<http://www.w3.org/2001/XMLSchema#boolean> ;
+	<http://www.bbc.co.uk/ontologies/creativework/primaryFormat> <http://www.bbc.co.uk/ontologies/creativework/TextualFormat> , <http://www.bbc.co.uk/ontologies/creativework/InteractiveFormat> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateCreated> "2011-03-09T10:30:19.095+02:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/dateModified> "2011-05-26T16:51:21.621+03:00"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+	<http://www.bbc.co.uk/ontologies/creativework/thumbnail> <http://www.bbc.co.uk/thumbnail/1504204789> ;
+	<http://www.bbc.co.uk/ontologies/creativework/altText> "thumbnail atlText for CW http://www.bbc.co.uk/context/12#id" ;
+	<http://www.bbc.co.uk/ontologies/bbc/primaryContentOf> <http://www.bbc.co.uk/things/1380157102#id> .
+
+<http://www.bbc.co.uk/things/1380157102#id> <http://www.bbc.co.uk/ontologies/bbc/webDocumentType> <http://www.bbc.co.uk/ontologies/bbc/HighWeb> ;
+	<http://www.bbc.co.uk/ontologies/bbc/ProductType> <http://www.bbc.co.uk/ontologies/bbc/Blogs> ;
+	<http://www.bbc.co.uk/ontologies/coreconcepts/primaryTopic> <http://dbpedia.org/resource/Okreek,_South_Dakota> .
+
+<http://dbpedia.org/resource/Okreek,_South_Dakota> a <http://dbpedia.org/ontology/Place> ;
+	<http://xmlns.com/foaf/0.1/name> "Okreek" ;
+	<http://www.w3.org/2000/01/rdf-schema#comment> "Okreek is an unincorporated community in Todd County, South Dakota, United States. As of the 2010 Census, the population was 269. The town is wholly within the jurisdiction of the Rosebud Indian Reservation, and the populace is almost entirely Sioux-American. Okreek consists primarily of two long blocks of inhabited tract housing, and has about 30 private telephone subscribers within town limits. There is also an elementary school and a Post Office which has been assigned the ZIP Code of 57563." ;
+	<http://dbpedia.org/ontology/country> <http://dbpedia.org/resource/United_States> ;
+	<http://www.w3.org/2003/01/geo/wgs84_pos#geometry> "POINT(-100.386 43.3622)" .

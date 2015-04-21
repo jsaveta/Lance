@@ -1,0 +1,163 @@
+
+<http://www.bbc.co.uk/things/9#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1247083833#id> ;
+	<http://www.transf_num> <http://www.trans/53> .
+
+<http://www.trans/53> <http://www.type> "0" ;
+	<http://www.prop> "CW_id" ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/9#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1247083833#id> ;
+	<http://www.transf_num> <http://www.trans/53> .
+
+<http://www.trans/53> <http://www.type> "0" ;
+	<http://www.prop> "CW_id" ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/9#id> <http://www.transf_num> <http://www.trans/54> .
+
+<http://www.trans/54> <http://www.type> "27" ;
+	<http://www.prop> <http://www.bbc.co.uk/ontologies/creativework/NewsItem> ;
+	<http://www.weight> "0.75" .
+
+<http://www.bbc.co.uk/things/9#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1247083833#id> ;
+	<http://www.transf_num> <http://www.trans/55> .
+
+<http://www.trans/55> <http://www.type> "27" ;
+	<http://www.prop> <http://dbpedia.org/ontology/Event> ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/1320659408#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1320659408#id> ;
+	<http://www.transf_num> <http://www.trans/56> .
+
+<http://www.trans/56> <http://www.type> "34" ;
+	<http://www.prop> <http://www.bbc.co.uk/things/1320659408#id> ;
+	<http://www.weight> "1.0" .
+
+<http://dbpedia.org/resource/Carom_billiards> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://dbpedia.org/resource/Carom_billiards> ;
+	<http://www.transf_num> <http://www.trans/57> .
+
+<http://www.trans/57> <http://www.type> "27" ;
+	<http://www.prop> <http://dbpedia.org/ontology/Sport> ;
+	<http://www.weight> "0.75" .
+
+<http://www.bbc.co.uk/things/10#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1260649151#id> ;
+	<http://www.transf_num> <http://www.trans/58> .
+
+<http://www.trans/58> <http://www.type> "0" ;
+	<http://www.prop> "CW_id" ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/10#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1260649151#id> ;
+	<http://www.transf_num> <http://www.trans/58> .
+
+<http://www.trans/58> <http://www.type> "0" ;
+	<http://www.prop> "CW_id" ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/10#id> <http://www.transf_num> <http://www.trans/59> .
+
+<http://www.trans/59> <http://www.type> "29" ;
+	<http://www.prop> <http://www.bbc.co.uk/ontologies/creativework/NewsItem> ;
+	<http://www.weight> "0.75" .
+
+<http://www.bbc.co.uk/things/10#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1260649151#id> ;
+	<http://www.transf_num> <http://www.trans/60> .
+
+<http://www.trans/60> <http://www.type> "31" ;
+	<http://www.prop> <http://www.bbc.co.uk/ontologies/creativework/about> ;
+	<http://www.weight> "0.0" .
+
+<http://www.bbc.co.uk/things/10#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1260649151#id> ;
+	<http://www.transf_num> <http://www.trans/61> .
+
+<http://www.trans/61> <http://www.type> "31" ;
+	<http://www.prop> <http://www.bbc.co.uk/ontologies/creativework/about> ;
+	<http://www.weight> "0.0" .
+
+<http://www.bbc.co.uk/things/10#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1260649151#id> ;
+	<http://www.transf_num> <http://www.trans/62> .
+
+<http://www.trans/62> <http://www.type> "31" ;
+	<http://www.prop> <http://www.bbc.co.uk/ontologies/creativework/about> ;
+	<http://www.weight> "0.0" .
+
+<http://www.bbc.co.uk/things/11#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/251937907#id> ;
+	<http://www.transf_num> <http://www.trans/63> .
+
+<http://www.trans/63> <http://www.type> "0" ;
+	<http://www.prop> "CW_id" ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/11#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/251937907#id> ;
+	<http://www.transf_num> <http://www.trans/63> .
+
+<http://www.trans/63> <http://www.type> "0" ;
+	<http://www.prop> "CW_id" ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/11#id> <http://www.transf_num> <http://www.trans/64> .
+
+<http://www.trans/64> <http://www.type> "28" ;
+	<http://www.prop> <http://www.bbc.co.uk/ontologies/creativework/NewsItem> ;
+	<http://www.weight> "0.75" .
+
+<http://www.bbc.co.uk/things/11#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/251937907#id> ;
+	<http://www.transf_num> <http://www.trans/65> .
+
+<http://www.trans/65> <http://www.type> "27" ;
+	<http://www.prop> <http://dbpedia.org/ontology/Event> ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/644096401#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/644096401#id> ;
+	<http://www.transf_num> <http://www.trans/66> .
+
+<http://www.trans/66> <http://www.type> "34" ;
+	<http://www.prop> <http://www.bbc.co.uk/things/644096401#id> ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/12#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/948637293#id> ;
+	<http://www.transf_num> <http://www.trans/67> .
+
+<http://www.trans/67> <http://www.type> "0" ;
+	<http://www.prop> "CW_id" ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/12#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/948637293#id> ;
+	<http://www.transf_num> <http://www.trans/67> .
+
+<http://www.trans/67> <http://www.type> "0" ;
+	<http://www.prop> "CW_id" ;
+	<http://www.weight> "1.0" .
+
+<http://www.bbc.co.uk/things/12#id> <http://www.transf_num> <http://www.trans/68> .
+
+<http://www.trans/68> <http://www.type> "28" ;
+	<http://www.prop> <http://www.bbc.co.uk/ontologies/creativework/NewsItem> ;
+	<http://www.weight> "0.75" .
+
+<http://www.bbc.co.uk/things/1380157102#id> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/things/1380157102#id> ;
+	<http://www.transf_num> <http://www.trans/69> .
+
+<http://www.trans/69> <http://www.type> "34" ;
+	<http://www.prop> <http://www.bbc.co.uk/things/1380157102#id> ;
+	<http://www.weight> "1.0" .
+
+<http://dbpedia.org/resource/Okreek,_South_Dakota> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/ontologies/coreconcepts/Okreek,_South_Dakota> ;
+	<http://www.transf_num> <http://www.trans/70> .
+
+<http://www.trans/70> <http://www.type> "0" ;
+	<http://www.prop> "Thing_sub" ;
+	<http://www.weight> "1.0" .
+
+<http://dbpedia.org/resource/Okreek,_South_Dakota> <http://www.w3.org/2004/02/skos/core#exactMatch> <http://www.bbc.co.uk/ontologies/coreconcepts/Okreek,_South_Dakota> ;
+	<http://www.transf_num> <http://www.trans/70> .
+
+<http://www.trans/70> <http://www.type> "0" ;
+	<http://www.prop> "Thing_sub" ;
+	<http://www.weight> "1.0" .
+
+<http://dbpedia.org/resource/Okreek,_South_Dakota> <http://www.transf_num> <http://www.trans/71> .
+
+<http://www.trans/71> <http://www.type> "27" ;
+	<http://www.prop> <http://dbpedia.org/ontology/Place> ;
+	<http://www.weight> "1.0" .

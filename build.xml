@@ -1,0 +1,159 @@
+<project name="ldimbench" basedir="." default="show-usage">
+	<property name="version.number.major" value="0" />
+	<property name="version.number.minor" value="1" />
+	
+	<property name="dir.src" location="src"/>
+	<property name="dir.bin" location="bin"/>
+	<property name="dir.dist" location="dist"/>
+	<property name="dir.data" location="data"/>
+	<property name="dir.datasets.and.ontologies" location="datasets_and_ontologies"/>
+	<property name="dir.lib" location="lib/"/>
+	<property name="jar.file.name" value="ldimbench"/>
+	<property name="ref.knowledge" value="${jar.file.name}"/>
+	
+	<path id="classpath-lib">
+    <fileset dir="${dir.lib}">
+      <include name="*.jar"/>
+    </fileset>
+  </path>
+	
+	<target name="clean">
+		<delete dir="${dir.bin}" />
+		<delete file="${dir.dist}/${jar.file.name}*.jar" />
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${dir.bin}"/>
+		<mkdir dir="${dir.dist}"/>		
+		<javac srcdir="${dir.src}" 
+			   destdir="${dir.bin}"
+			   debug="off"
+			   source="1.7"
+			   includeantruntime="false">
+			<classpath refid="classpath-lib"/>
+		</javac>
+	</target>
+	
+	<target name="rebuild" depends="clean, compile">
+	</target>
+	
+	
+  <target name="setup-temp">
+		
+		<delete dir="${dir.data}"/>
+		
+		<mkdir dir="./data-temp"/>
+  		<mkdir dir="./data-temp/datasets"/>
+  		<copy todir="./data-temp/datasets">
+  			<fileset dir="datasets_and_ontologies/datasets"/>
+  		</copy>
+  		<mkdir dir="./data-temp/ontologies"/>
+		<copy todir="./data-temp/ontologies">
+      		<fileset dir="datasets_and_ontologies/ontologies"/>
+		</copy>		
+		  	
+		<move file="./data-temp" toFile="./data"/>
+		<delete dir="./data-temp"/>
+		
+		
+	
+		<!--<delete file="./definitions.properties"/>
+		<copy file="datasets_and_ontologies/definitions.properties-${query_mix}" tofile="./definitions.properties"/>-->
+	</target>
+	
+	<!--  Use this target to setup benchmark driver with standard SPARQL 1.1 query syntax and reduced query mix -->
+	<target name="setup">
+    <antcall target="setup-temp">
+      <param name="query_mix" value="base"/>
+      <param name="customization" value="standard"/>
+    </antcall>
+	</target>
+	
+	
+	<target name="copy-config-files-to-dist" >
+		<delete file="${dir.dist}\readme.txt"/>
+		<delete file="${dir.dist}\test.properties"/>
+		<delete file="${dir.dist}\definitions.properties"/>
+		<delete file="${dir.dist}\config.ini"/>
+		<delete file="${dir.dist}\app.log"/>
+	
+		<copy todir="${dir.dist}">
+			<fileset file="readme.txt" />
+			<fileset file="test.properties" />
+			<fileset file="definitions.properties" />
+			<fileset file="config.ini" />
+		</copy>
+	</target>
+	
+	<target name="build" depends="setup, rebuild">	
+		<jar destfile="${dir.dist}\${jar.file.name}-base.jar" basedir="${dir.bin}">
+			<manifest>
+				<attribute name="Main-Class" value="main.TestDriver"/>
+				<attribute name="Benchmark-Release-Version" value="${version.number.major}.${version.number.minor}.${revision.number}"/>
+				<attribute name="Benchmark-Release-Type" value="base qierymix, standard SPARQL 1.1"/>
+			</manifest>
+			<zipgroupfileset dir="${dir.lib}" includes="*.jar"/>
+			<fileset file="readme.txt" />
+			<fileset file="test.properties" />
+			<fileset file="definitions.properties" />
+		</jar>
+		<antcall target="copy-config-files-to-dist"/>
+		<antcall target="zip">
+			<param name="query_mix" value="base"/>
+		</antcall>
+		<antcall target="unzip"/>
+		<delete dir="./data"/>
+		<delete dir="${dir.dist}\SourceDatasets" />
+		<mkdir dir="${dir.dist}\SourceDatasets" />
+		<delete dir="${dir.dist}\TargetDatasets" />
+		<mkdir dir="${dir.dist}\TargetDatasets" />
+		<delete dir="${dir.dist}\GoldStandards" />
+		<mkdir dir="${dir.dist}\GoldStandards" />
+		<delete dir="${dir.dist}\OAEIGoldStandards" />
+		<mkdir dir="${dir.dist}\OAEIGoldStandards" />
+		<delete dir="${dir.dist}\OAEIRDFGoldStandards" />
+		<mkdir dir="${dir.dist}\OAEIRDFGoldStandards" />
+	</target>
+	
+	
+
+	<!-- Zip reference knowledge (ontologies and reference datasets) -->
+	<target name="zip">
+		<zip destfile="${dir.dist}/${ref.knowledge}-${query_mix}.zip">
+			<zipfileset dir="." includes="datasets_and_ontologies/**" excludes="datasets_and_ontologies/datasets/*.zip"/>
+		</zip>
+	</target>
+	
+	<!-- UnZip all compressed datasets -->
+	<target name="unzip">
+		<unzip dest="${dir.datasets.and.ontologies}/datasets">
+			<fileset dir="${dir.datasets.and.ontologies}/datasets">
+				<include name="**/*.zip"/>
+			</fileset>			
+		</unzip>
+		
+		<unzip dest="${dir.dist}">
+			<fileset dir="${dir.dist}">
+				<include name="**/*.zip"/>
+			</fileset>			
+		</unzip>
+	</target>
+	
+
+	<target name="deploy">
+		<copy todir="${dir.deploy}">
+			<fileset dir="${dir.dist}" includes="*.jar"/>
+			<fileset dir="${dir.dist}" includes="*.zip"/>
+		</copy>
+	</target>
+	
+	<target name="show-usage">
+    <echo>
+---------------------------------------------------------------------------------------------------------------------------------------
+To BUILD the LDBC Semantic Publishing Benchmark, you should execute :
+		ant build
+
+---------------------------------------------------------------------------------------------------------------------------------------
+    </echo>
+	</target>
+</project>
