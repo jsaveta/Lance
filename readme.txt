@@ -4,8 +4,7 @@ Description :
 
 -------------------------------------------------------------------------
 
-The Linked Data Instance Matching Benchmark (LANCE), is a
-benchmark for the assessment of Instance Matching techniques and
+LANCE is a benchmark for the assessment of Instance Matching techniques and
 systems for Linked Data data that are accompanied by a schema.
 Essentially, LANCE implements:
 
