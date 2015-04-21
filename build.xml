@@ -1,4 +1,4 @@
-<project name="ldimbench" basedir="." default="show-usage">
+<project name="lance" basedir="." default="show-usage">
 	<property name="version.number.major" value="0" />
 	<property name="version.number.minor" value="1" />
 	
@@ -8,7 +8,7 @@
 	<property name="dir.data" location="data"/>
 	<property name="dir.datasets.and.ontologies" location="datasets_and_ontologies"/>
 	<property name="dir.lib" location="lib/"/>
-	<property name="jar.file.name" value="ldimbench"/>
+	<property name="jar.file.name" value="lance"/>
 	<property name="ref.knowledge" value="${jar.file.name}"/>
 	
 	<path id="classpath-lib">
