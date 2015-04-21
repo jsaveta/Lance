@@ -1,5 +1,5 @@
 ![LDBC Logo](ldbc_logo.png)
-Linked Data Instance Matching Benchmark
+LANCE
 -----------------------------
 
 ###Description

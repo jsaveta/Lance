@@ -1,4 +1,4 @@
-Linked Data Instance Matching Benchmark (LANCE)
+LANCE
 
 Description : 
 
