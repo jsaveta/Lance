@@ -14,7 +14,6 @@ import util.TransformationsMeasurements;
 import endpoint.SparqlQueryExecuteManager;
 import generators.data.DataGenerator;
 import main.TestDriver;
-//import eu.ldbc.semanticpublishing.refdataset.DataManager;
 
 /**
  * @author jsaveta, Foundation for Research and Technology-Hellas (FORTH)

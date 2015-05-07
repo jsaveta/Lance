@@ -55,7 +55,6 @@ public class WriteIntermediateGS extends Worker {
 		transformationsArrayList.add("ChangeBooleanValue"); 
 		transformationsArrayList.add("ChangeGenderFormat");
 		transformationsArrayList.add("StemWord"); 
-		//transformationsArrayList.add("ChangePoint");  ??????
 		
 		// 19 - 22 are structure transformations
 		transformationsArrayList.add("AddProperty"); 
@@ -109,7 +108,6 @@ public class WriteIntermediateGS extends Worker {
 		GsSesameModel.add(subject,numOfTrans,transf_u); // value1 has trans_num transf
 		GsSesameModel.add(transf_r,type_,transformation_); //transf has transfrormation type a number from the map
 
-		//System.out.println("index of " + this.transformation +"  = "+transformationsArrayList.indexOf(this.transformation) );
 		if(this.worker_.getFtransformations().containsKey(this.worker_.getSourceFileName())){
 			ArrayList<Double> values = this.worker_.getFtransformations().get(this.worker_.getSourceFileName()); // first, copy out the existing values
 			

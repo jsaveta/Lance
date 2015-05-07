@@ -174,9 +174,6 @@ public class DataGenerator {
 		if(Integer.parseInt(configuration.getString(Configurations.FILES_FOR_RESCAL_SAMPLING)) > 0){ 
 			int files = new File("./SourceDatasets").list().length;
 			double k = js*files + Integer.parseInt(configuration.getString(Configurations.FILES_FOR_RESCAL_SAMPLING)); //TODO fix this!
-			
-			//System.out.println("js : " +js);
-			//System.out.println("k : " +k);
 			int times = Integer.parseInt(configuration.getString(Configurations.FILES_FOR_RESCAL_SAMPLING));
 			
 			if((int)k <= Integer.parseInt(configuration.getString(Configurations.FILES_FOR_RESCAL_SAMPLING))){
@@ -213,10 +210,6 @@ public class DataGenerator {
 			System.out.println("\n\tPlease give a number greater than 2 for rescalSampling.\n");
 			System.exit(0); //exit program
 		}
-	
-	//	System.out.println("\tcompleted! Total Creative Works created : " + String.format("%,d", (DataManager.creativeWorksNextId.get() - creativeWorksInDatabase)) + ". Time : " + (System.currentTimeMillis() - currentTime) + " ms");		
-			
-		
 	}
 	
 }
