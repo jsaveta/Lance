@@ -70,11 +70,11 @@ public class LoadOntologies extends DataManager{
     private final String owlInstanceUriAsText = "http://www.w3.org/1999/02/22-rdf-syntax-ns#about";
     private final String xsdAsText = "http://www.w3.org/2001/XMLSchema#";
     private final String geoPointAsText = "http://www.w3.org/2003/01/geo/wgs84_pos#";
-    String endpointUrl = TestDriver.getConfigurations().getString(Configurations.ENDPOINT_URL);
-    
+    private String endpointUrl = TestDriver.getConfigurations().getString(Configurations.ENDPOINT_URL);
+    private URI schemaContext;
 	
 	 public LoadOntologies(boolean enable) throws IOException{
-		 
+		   
 		 Properties props = new Properties();
          props.setProperty("log4j.rootLogger", "DEBUG, R");
          props.setProperty("log4j.appender.R.layout", "org.apache.log4j.PatternLayout");
@@ -82,10 +82,12 @@ public class LoadOntologies extends DataManager{
          props.setProperty("log4j.appender.R", "org.apache.log4j.FileAppender");
          props.setProperty("log4j.appender.R.File", "app.log");
          PropertyConfigurator.configure(props);
-         
+            
          try{
 	        	this.repository = new HTTPRepository(endpointUrl);
 	        	this.repository.initialize();
+	            schemaContext=this.repository.getValueFactory().createURI(TestDriver.getConfigurations().getString(Configurations.ENDPOINT_URL)+"/ontologies");
+	     		
 	        }catch(RepositoryException ex){
 	            ex.printStackTrace();
 	        }
@@ -96,8 +98,7 @@ public class LoadOntologies extends DataManager{
 			FileUtils.collectFilesList2(ontologiesPath, collectedFiles, "*", true);
 			Collections.sort(collectedFiles);
 			
-			URI schemaContext=this.repository.getValueFactory().createURI(TestDriver.getConfigurations().getString(Configurations.ENDPOINT_URL)+"/ontologies");
-	        try{
+			try{
 	            RepositoryConnection repoConn=this.repository.getConnection();
 		          for(File file : collectedFiles){
 		        	  System.out.println(file.getName());
@@ -116,7 +117,7 @@ public class LoadOntologies extends DataManager{
         URI typeOfUri=this.repository.getValueFactory().createURI(typeOfUriAsText);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, classUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, classUri, false,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	if(!(tempResult.getSubject() instanceof BNode)){
@@ -131,7 +132,7 @@ public class LoadOntologies extends DataManager{
         URI owlClassUri=this.repository.getValueFactory().createURI(owlClassUriAsText);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, owlClassUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, owlClassUri, false,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	if(!(tempResult.getSubject() instanceof BNode)){
@@ -152,7 +153,7 @@ public class LoadOntologies extends DataManager{
         URI classUri=this.repository.getValueFactory().createURI(startingClass);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, subClassUri, classUri, useInference);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, subClassUri, classUri, useInference,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	if(!(tempResult.getSubject() instanceof BNode)){
@@ -172,7 +173,7 @@ public class LoadOntologies extends DataManager{
         URI classUri=this.repository.getValueFactory().createURI(startingClass);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(classUri, subClassUri,null , useInference);
+            RepositoryResult<Statement> results=repoConn.getStatements(classUri, subClassUri,null , useInference,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	if(!(tempResult.getObject() instanceof BNode) && !tempResult.getObject().stringValue().equals(startingClass)){
@@ -192,7 +193,7 @@ public class LoadOntologies extends DataManager{
 	    URI classUri = this.repository.getValueFactory().createURI(startingClass);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, disjointClassUri, classUri,false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, disjointClassUri, classUri,false,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	if(!(tempResult.getObject() instanceof BNode)) disjointClasses.add(tempResult.getSubject().stringValue());
@@ -204,7 +205,7 @@ public class LoadOntologies extends DataManager{
         
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(classUri, disjointClassUri,null ,false);
+            RepositoryResult<Statement> results=repoConn.getStatements(classUri, disjointClassUri,null ,false,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	if(!(tempResult.getObject() instanceof BNode))disjointClasses.add(tempResult.getObject().stringValue());
@@ -253,7 +254,7 @@ public class LoadOntologies extends DataManager{
 	    URI classUri = this.repository.getValueFactory().createURI(startingClass);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, equivalentClassUri, classUri,false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, equivalentClassUri, classUri,false,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	if(!(tempResult.getObject() instanceof BNode)) equivalentClasses.add(tempResult.getSubject().stringValue());
@@ -265,7 +266,7 @@ public class LoadOntologies extends DataManager{
         
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(classUri, equivalentClassUri,null ,false);
+            RepositoryResult<Statement> results=repoConn.getStatements(classUri, equivalentClassUri,null ,false,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	if(!(tempResult.getObject() instanceof BNode)) equivalentClasses.add(tempResult.getObject().stringValue());
@@ -368,7 +369,7 @@ public class LoadOntologies extends DataManager{
 
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, null, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, null, false,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	//if range is not rdf:resource literal means that is an object property
@@ -385,7 +386,7 @@ public class LoadOntologies extends DataManager{
 		URI rdfProperyUri=this.repository.getValueFactory().createURI(rdfProperyUriAsText);
 		try{
 		    RepositoryConnection repoConn=this.repository.getConnection();
-		    RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, rdfProperyUri, false);
+		    RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, rdfProperyUri, false,schemaContext);
 		    while(results.hasNext()){
 		    	allRdfProperties.add(results.next().getSubject().stringValue());
 		    }
@@ -403,7 +404,7 @@ public class LoadOntologies extends DataManager{
 
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, null, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, null, false,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	//if range is rdf:resource literal means that is an datatype property
@@ -420,7 +421,7 @@ public class LoadOntologies extends DataManager{
 		URI rdfProperyUri=this.repository.getValueFactory().createURI(rdfProperyUriAsText);
 		try{
 		    RepositoryConnection repoConn=this.repository.getConnection();
-		    RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, rdfProperyUri, false);
+		    RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, rdfProperyUri, false,schemaContext);
 		    while(results.hasNext()){
 		    	allRdfProperties.add(results.next().getSubject().stringValue());
 		    }
@@ -438,7 +439,7 @@ public class LoadOntologies extends DataManager{
 
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, null, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, null, false,schemaContext);
             while(results.hasNext()){
             	Statement tempResult = results.next();
             	//if range is not rdf:resource literal means that is an object property
@@ -455,7 +456,7 @@ public class LoadOntologies extends DataManager{
 		URI objectProperyUri=this.repository.getValueFactory().createURI(owlObjectProperyUriAsText);
 		try{
 		    RepositoryConnection repoConn=this.repository.getConnection();
-		    RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, objectProperyUri, false);
+		    RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, objectProperyUri, false,schemaContext);
 		    while(results.hasNext()){
 		    	allObjectProperties.add(results.next().getSubject().stringValue());
 		    }
@@ -474,7 +475,7 @@ public class LoadOntologies extends DataManager{
         URI literalUri = this.repository.getValueFactory().createURI(literalAsText);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, literalUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, literalUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }
@@ -487,7 +488,7 @@ public class LoadOntologies extends DataManager{
         URI datatypeProperyUri=this.repository.getValueFactory().createURI(owlDatatypeProperyUriAsText);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, datatypeProperyUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, datatypeProperyUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }
@@ -505,7 +506,7 @@ public class LoadOntologies extends DataManager{
         URI propertyUri=this.repository.getValueFactory().createURI(startingProperty);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, subPropertyUri, propertyUri, useInference);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, subPropertyUri, propertyUri, useInference,schemaContext);
             while(results.hasNext()){
             	String subProperty = results.next().getSubject().stringValue();
             	if(!subProperty.equals(startingProperty)) subProperties.add(subProperty);
@@ -741,7 +742,7 @@ public class LoadOntologies extends DataManager{
         URI typeOfUri=this.repository.getValueFactory().createURI(typeOfUriAsText);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, functionalPropertyUri,false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, functionalPropertyUri,false,schemaContext);
             while(results.hasNext()){
             	functionalProperties.add(results.next().getSubject().stringValue());
             }
@@ -808,7 +809,7 @@ public class LoadOntologies extends DataManager{
         URI classUri=this.repository.getValueFactory().createURI(className);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, classUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, classUri, false,schemaContext);
             while(results.hasNext()){
                 retInstances.add(results.next().getSubject().stringValue());
             }
@@ -820,7 +821,7 @@ public class LoadOntologies extends DataManager{
         URI owlTypeOfUri=this.repository.getValueFactory().createURI(owlInstanceUriAsText);
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, owlTypeOfUri, classUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, owlTypeOfUri, classUri, false,schemaContext);
             while(results.hasNext()){
                 retInstances.add(results.next().getSubject().stringValue());
             }
@@ -839,7 +840,7 @@ public class LoadOntologies extends DataManager{
         URI literalUri = this.repository.getValueFactory().createURI(xsdAsText+"string");
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, literalUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, literalUri, false,schemaContext);
             while(results.hasNext()){
             	allStringProperties.add(results.next().getSubject().stringValue());
             }
@@ -855,7 +856,7 @@ public class LoadOntologies extends DataManager{
         URI literalUri = this.repository.getValueFactory().createURI(xsdAsText+"boolean");
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, literalUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, literalUri, false,schemaContext);
             while(results.hasNext()){
             	allBooleanProperties.add(results.next().getSubject().stringValue());
             }
@@ -875,12 +876,12 @@ public class LoadOntologies extends DataManager{
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
             //date
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, dateUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, dateUri, false,schemaContext);
             while(results.hasNext()){
             	allDateProperties.add(results.next().getSubject().stringValue());
             }
             //dateTime
-            results=repoConn.getStatements(null, rangeOfUri, dateTimeUri, false);
+            results=repoConn.getStatements(null, rangeOfUri, dateTimeUri, false,schemaContext);
             while(results.hasNext()){
             	allDateProperties.add(results.next().getSubject().stringValue());
             }
@@ -897,7 +898,7 @@ public class LoadOntologies extends DataManager{
         URI latUri = this.repository.getValueFactory().createURI(geoPointAsText+"lat");
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, latUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, latUri, false,schemaContext);
             while(results.hasNext()){
             	geoPointProperties.add(results.next().getSubject().stringValue());
             }
@@ -915,7 +916,7 @@ public class LoadOntologies extends DataManager{
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
             
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, longUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, longUri, false,schemaContext);
             while(results.hasNext()){
             	geoPointProperties.add(results.next().getSubject().stringValue());
             }
@@ -940,42 +941,42 @@ public class LoadOntologies extends DataManager{
         try{
             RepositoryConnection repoConn=this.repository.getConnection();
             //double
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, doubleUri, false);
+            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, doubleUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }
             //integer
-            results=repoConn.getStatements(null, rangeOfUri, intUri, false);
+            results=repoConn.getStatements(null, rangeOfUri, intUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }
             //float
-            results=repoConn.getStatements(null, rangeOfUri, floatUri, false);
+            results=repoConn.getStatements(null, rangeOfUri, floatUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }
             //decimal
-            results=repoConn.getStatements(null, rangeOfUri, decimalUri, false);
+            results=repoConn.getStatements(null, rangeOfUri, decimalUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }
             //nonNegativeInteger
-            results=repoConn.getStatements(null, rangeOfUri, nonNegativeIntegerUri, false);
+            results=repoConn.getStatements(null, rangeOfUri, nonNegativeIntegerUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }
             //negativeInteger 
-            results=repoConn.getStatements(null, rangeOfUri, negativeIntegerUri, false);
+            results=repoConn.getStatements(null, rangeOfUri, negativeIntegerUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }
             //nonPositiveInteger 
-            results=repoConn.getStatements(null, rangeOfUri, nonPositiveIntegerUri, false);
+            results=repoConn.getStatements(null, rangeOfUri, nonPositiveIntegerUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }
             //positiveInteger
-            results=repoConn.getStatements(null, rangeOfUri, positiveIntegerUri, false);
+            results=repoConn.getStatements(null, rangeOfUri, positiveIntegerUri, false,schemaContext);
             while(results.hasNext()){
             	allDatatypeProperties.add(results.next().getSubject().stringValue());
             }

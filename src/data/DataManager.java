@@ -27,6 +27,7 @@ public class DataManager {
 	private final Definitions definitions = new Definitions();
 	protected SparqlQueryExecuteManager queryExecuteManager;
 	protected Repository repository;
+	
     
 
 	public DataManager() {		

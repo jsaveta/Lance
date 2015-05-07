@@ -11,11 +11,13 @@ import java.util.Collections;
 import java.util.List;
 
 import org.openrdf.model.URI;
+import org.openrdf.repository.Repository;
 import org.openrdf.repository.RepositoryConnection;
 import org.openrdf.repository.RepositoryException;
 import org.openrdf.repository.http.HTTPRepository;
 import org.openrdf.rio.RDFFormat;
 import org.openrdf.rio.RDFParseException;
+
 
 
 
@@ -37,8 +39,9 @@ public class LoadDatasets extends DataManager{
 	 */
 	static int totalLines = 0;
 	public LoadDatasets(boolean enable) throws IOException{
+			
 			String endpointUrl = TestDriver.getConfigurations().getString(Configurations.ENDPOINT_URL);
-		        try{
+			     try{
 		        	this.repository = new HTTPRepository(endpointUrl);
 		        	this.repository.initialize();
 		        }catch(RepositoryException ex){

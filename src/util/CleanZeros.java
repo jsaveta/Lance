@@ -4,9 +4,13 @@ import java.util.ArrayList;
 
 public class CleanZeros {
 public static ArrayList<Integer> indexes = new ArrayList<Integer>();
-
+//TODO FIX THIS! array index out of bounds!!! maybe because of zeros?!?!
+//so we cannot calculate specific weights etc...
     public static double[][] cleanZeroRows(double[][] matrix) {
         //first find those that need to delete
+    	 System.out.println("matrix[0].length  "+matrix[0].length);
+         System.out.println("matrix.length "+matrix.length);
+         write(matrix);
         boolean[] deleteThese = new boolean[matrix.length];
         int count = 0;
 
@@ -43,6 +47,9 @@ public static ArrayList<Integer> indexes = new ArrayList<Integer>();
                 }
                
             }
+            System.out.println("newMatrix[0].length  "+newMatrix[0].length);
+            System.out.println("newMatrix.length "+newMatrix.length);
+            write(newMatrix);
             return newMatrix;
         }
     }
@@ -65,19 +72,19 @@ public static ArrayList<Integer> indexes = new ArrayList<Integer>();
 //        return matrix;
 //    }
 //
-//    private static void write(double[][] matrix, PrintStream out) {
-//        int rows = matrix.length;
-//        int cols = matrix[0].length;
-//        for(int i=0;i<rows;i++){
-//            for(int j=0;j<cols;j++){
-//                out.print(matrix[i][j]);
-//                out.print(" ");
-//            }           
-//            out.print("\n");
-//        }
-//        out.print("\n");
-//    }
-//
+    private static void write(double[][] matrix) {
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<cols;j++){
+                System.out.print(matrix[i][j]);
+                System.out.print(" ");
+            }           
+            System.out.print("\n");
+        }
+        System.out.print("\n");
+    }
+
     public static double[][] transpose(double[][] m) {
     	
         int r = m.length;

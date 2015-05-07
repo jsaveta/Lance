@@ -191,13 +191,13 @@ public class TransformationsMeasurements {
 		Logger.write("\n-----------------------------------------\n");
 		
 		Logger.write("Given "+totalGivenTriples(valueSuccess,valueFailure)+" triples to transform with a value test case. "+valueSuccess+" of them were transformed.\n"
-				+ " This corresponds to "+finalSuccessRate(valueSuccess, valueFailure)+" per cent of triples to be transformed and "+transformedTriplesPercentage(valueSuccess, TestDriver.getConfigurations().getInt(Configurations.TOTAL_TRIPLES))+" of all triples. ");
+				+ " This corresponds to "+finalSuccessRate(valueSuccess, valueFailure)+" per cent of triples to be transformed and "+transformedTriplesPercentage(valueSuccess, TestDriver.getConfigurations().getInt(Configurations.TOTAL_TRIPLES))+" per cent of all triples. ");
 		Logger.write("Given "+totalGivenTriples(structureSuccess,structureFailure)+" triples to transform with a structure test case. "+structureSuccess+" of them were transformed.\n"
-				+ " This corresponds to "+finalSuccessRate(structureSuccess, structureFailure)+" per cent of triples to be transformed and "+transformedTriplesPercentage(structureSuccess, TestDriver.getConfigurations().getInt(Configurations.TOTAL_TRIPLES))+" of all triples. ");
+				+ " This corresponds to "+finalSuccessRate(structureSuccess, structureFailure)+" per cent of triples to be transformed and "+transformedTriplesPercentage(structureSuccess, TestDriver.getConfigurations().getInt(Configurations.TOTAL_TRIPLES))+" per cent of all triples. ");
 		Logger.write("Given "+totalGivenTriples(semanticsSuccess,semanticsFailure)+" triples to transform with a semantics test case.  "+semanticsSuccess+" of them were transformed.\n"
-				+ " This corresponds to "+finalSuccessRate(semanticsSuccess, semanticsFailure)+" per cent of triples to be transformed and "+transformedTriplesPercentage(semanticsSuccess, TestDriver.getConfigurations().getInt(Configurations.TOTAL_TRIPLES))+" of all triples. ");
+				+ " This corresponds to "+finalSuccessRate(semanticsSuccess, semanticsFailure)+" per cent of triples to be transformed and "+transformedTriplesPercentage(semanticsSuccess, TestDriver.getConfigurations().getInt(Configurations.TOTAL_TRIPLES))+" per cent of all triples. ");
 		Logger.write("Given "+totalGivenTriples(complexSuccess,complexFailure)+" triples to transform with a complex combination test case. "+complexSuccess+" of them were transformed.\n"
-				+ " This corresponds to "+finalSuccessRate(complexSuccess, complexFailure)+" per cent of triples to be transformed and "+transformedTriplesPercentage(complexSuccess, TestDriver.getConfigurations().getInt(Configurations.TOTAL_TRIPLES))+" of all triples. ");
+				+ " This corresponds to "+finalSuccessRate(complexSuccess, complexFailure)+" per cent of triples to be transformed and "+transformedTriplesPercentage(complexSuccess, TestDriver.getConfigurations().getInt(Configurations.TOTAL_TRIPLES))+" per cent of all triples. ");
 		
 		Logger.write("\n-----------------------------------------\n");
 		
