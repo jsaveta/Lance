@@ -336,13 +336,13 @@ public class LoadOntologies extends DataManager{
     
     /************************PROPERTIES*************************/
     
-    public Collection<String> getClassProperties(String startingClass) throws RepositoryException, MalformedQueryException, QueryEvaluationException{
+  public Collection<String> getClassProperties(String startingClass) throws RepositoryException, MalformedQueryException, QueryEvaluationException{
     	Set<String> allClassProperties = new HashSet<>();
 		RepositoryConnection con = this.repository.getConnection();
 		try{
-			  TupleQuery allClassPropertiesQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, "SELECT ?p  FROM <"+endpointUrl+"/datasets>"
-					  	+"WHERE {?s  a  <"+startingClass+"> ."
-				 		+ "?s ?p ?o .}");
+			  TupleQuery allClassPropertiesQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, "SELECT ?p "
+					  	+"WHERE {?p  rdfs:domain  <"+startingClass+"> .}");
+				 		
 			  		
 			   TupleQueryResult allClassPropertiesResult = allClassPropertiesQuery.evaluate();
 			   try {
@@ -361,7 +361,7 @@ public class LoadOntologies extends DataManager{
 			}
 	    return allClassProperties;
     }
-    
+	
     public Collection<String> getAllRdfObjectProperties(){
         Set<String> allRdfProperties=new HashSet<>();
         //check if property is object property
