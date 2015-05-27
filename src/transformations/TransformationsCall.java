@@ -138,11 +138,6 @@ public class TransformationsCall {
 			if( Definitions.semanticsAwareAllocation.getAllocationsArray().get(3) != 0.0){//System.out.println("subclassof");
 				Collection<String>  subClassesOf = loadOntologies.getSuperClasses(c,TestDriver.getConfigurations().getBoolean(Configurations.INFERENSE_SUBCLASS_SUBPROPERTY));
 				if(!subClassesOf.isEmpty()) subClassesOfMap.put(c, subClassesOf);
-//				System.out.println("c: " + c);				
-//				for (String obj : subClassesOf) {
-//					System.out.println("subClassesOf: " + obj);
-//				}
-//				
 			}
 			
 			/*equivalentclass map*/
@@ -184,16 +179,11 @@ public class TransformationsCall {
 		ArrayList<String> classPropertiesArrayList = new ArrayList<String>();
 		System.out.println("is ClassesCollection empty?  " + getClassesCollection().isEmpty());
 		for(String c : getClassesCollection()){
-//			System.out.println("retieved class " +c);
-//			System.out.println("retieving properties");
 			try {
 				classPropertiesArrayList.addAll(loadOntologies.getClassProperties(c));
-				System.out.println("is classPropertiesArrayList empty?  " + classPropertiesArrayList.isEmpty());
 			} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) { e.printStackTrace();} 
 		}
 			for(String p : classPropertiesArrayList){
-//				System.out.println("properties : " + p);
-				//TODO check queries!!! 
 				/*subPropertyOf map*/
 				if( Definitions.semanticsAwareAllocation.getAllocationsArray().get(8) != 0.0){//System.out.println("subPropertyOf");
 					Collection<String> subPropertyOf = new HashSet<>();
@@ -203,11 +193,6 @@ public class TransformationsCall {
 						e.printStackTrace();
 					}
 					if(!subPropertyOfMap.containsKey(p) && !subPropertyOf.isEmpty()) subPropertyOfMap.put(p, subPropertyOf);
-//					System.out.println("p: " + p);
-//					
-//					for (String obj : subPropertyOf) {
-//						System.out.println("subPropertyOf: " + obj);
-//					}
 				}
 				
 				/*equivalentProperty map*/

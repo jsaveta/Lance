@@ -588,13 +588,11 @@ public class LoadOntologies extends DataManager{
 			  TupleQuery allClassPropertiesQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, "SELECT ?p FROM <"+endpointUrl+"/ontologies>"
 					  	+"WHERE {?p <"+subPropertyOfUriAsText+"> <"+startingProperty+">   .}");
 			 
-			  System.out.println("startingProperty " + startingProperty);
 			   TupleQueryResult superPropertiesResult = allClassPropertiesQuery.evaluate();
 			   try {
 			      while (superPropertiesResult.hasNext()) {
 			         BindingSet bindingSet = superPropertiesResult.next();
 			         Value name = bindingSet.getValue("p");
-			         System.out.println("-------------------- " + name.stringValue());
 			         superProperties.add(name.stringValue());
 			      }
 			   }
