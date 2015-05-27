@@ -75,6 +75,8 @@ public class LoadDatasets extends DataManager{
 	public static int getNumOfTriplesInSourceDataset(File file){
 		int fileLines = countLinesNumber(file);
 		totalLines += fileLines;
+//		System.out.println("File lines " + fileLines);
+//		System.out.println("Total lines " + totalLines);
 	return totalLines;
 	}
 	

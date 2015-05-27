@@ -278,7 +278,7 @@ public class Worker extends AbstractAsynchronousWorker{
 	public void initializeFMapEntry(){
 		if(!getFtransformations().containsKey(sourceFileName)){
 			FTransfArray = new ArrayList<Double>();
-			for(int i=0; i <38; i++){ 
+			for(int i=0; i <38; i++){ //TODO check num
 				FTransfArray.add(0.0);
 			}	
 			this.getFtransformations().put(sourceFileName, FTransfArray);	

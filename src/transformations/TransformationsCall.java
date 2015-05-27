@@ -72,7 +72,7 @@ public class TransformationsCall {
 	private LoadOntologies loadOntologies;
 	private final Configurations configuration = new Configurations();
 	
-	public TransformationsCall(){
+	public TransformationsCall() throws RepositoryException, MalformedQueryException, QueryEvaluationException{
 		
 		TransformationsMeasurements timer = new TransformationsMeasurements();
 		timer.start(); //measure retrieving needed schema info time, start
@@ -138,6 +138,11 @@ public class TransformationsCall {
 			if( Definitions.semanticsAwareAllocation.getAllocationsArray().get(3) != 0.0){//System.out.println("subclassof");
 				Collection<String>  subClassesOf = loadOntologies.getSuperClasses(c,TestDriver.getConfigurations().getBoolean(Configurations.INFERENSE_SUBCLASS_SUBPROPERTY));
 				if(!subClassesOf.isEmpty()) subClassesOfMap.put(c, subClassesOf);
+//				System.out.println("c: " + c);				
+//				for (String obj : subClassesOf) {
+//					System.out.println("subClassesOf: " + obj);
+//				}
+//				
 			}
 			
 			/*equivalentclass map*/
@@ -177,12 +182,18 @@ public class TransformationsCall {
 			
 		/*properties*/
 		ArrayList<String> classPropertiesArrayList = new ArrayList<String>();
+		System.out.println("is ClassesCollection empty?  " + getClassesCollection().isEmpty());
 		for(String c : getClassesCollection()){
+//			System.out.println("retieved class " +c);
+//			System.out.println("retieving properties");
 			try {
 				classPropertiesArrayList.addAll(loadOntologies.getClassProperties(c));
+				System.out.println("is classPropertiesArrayList empty?  " + classPropertiesArrayList.isEmpty());
 			} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) { e.printStackTrace();} 
 		}
 			for(String p : classPropertiesArrayList){
+//				System.out.println("properties : " + p);
+				//TODO check queries!!! 
 				/*subPropertyOf map*/
 				if( Definitions.semanticsAwareAllocation.getAllocationsArray().get(8) != 0.0){//System.out.println("subPropertyOf");
 					Collection<String> subPropertyOf = new HashSet<>();
@@ -192,6 +203,11 @@ public class TransformationsCall {
 						e.printStackTrace();
 					}
 					if(!subPropertyOfMap.containsKey(p) && !subPropertyOf.isEmpty()) subPropertyOfMap.put(p, subPropertyOf);
+//					System.out.println("p: " + p);
+//					
+//					for (String obj : subPropertyOf) {
+//						System.out.println("subPropertyOf: " + obj);
+//					}
 				}
 				
 				/*equivalentProperty map*/
@@ -573,13 +589,13 @@ public class TransformationsCall {
 		
 	}
 	
-	public void setDatatypePropertiesCollection(){
+	public void setDatatypePropertiesCollection() throws RepositoryException, MalformedQueryException, QueryEvaluationException{
 		datatypePropertiesCollection.addAll(loadOntologies.getAllRdfDatatypeProperties());
 		datatypePropertiesCollection.addAll(loadOntologies.getAllDatatypeProperties());
 		datatypePropertiesCollection.remove("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
 	}
 	
-	public void setObjectPropertiesCollection(){
+	public void setObjectPropertiesCollection() throws RepositoryException, MalformedQueryException, QueryEvaluationException{
 		objectPropertiesCollection.addAll(loadOntologies.getAllRdfObjectProperties());
 		objectPropertiesCollection.addAll(loadOntologies.getAllObjectProperties());
 		objectPropertiesCollection.remove("http://www.w3.org/1999/02/22-rdf-syntax-ns#type");
@@ -722,6 +738,7 @@ public class TransformationsCall {
 	
 	public Map <String, Transformation> valueCases(TreeSet<String> treeSet){
 		ArrayList<String> value = new ArrayList<String>(treeSet);
+		//this.valueArrayList = valueArrayList;
 		Map <String, Transformation> predicatesObjectsMap = new HashMap<String, Transformation>();
 		
 		for(int i = 0; i < value.size(); i++){
@@ -892,6 +909,7 @@ public class TransformationsCall {
 	
 
 	public Map <String, Transformation> structureCases(TreeSet<String> treeSet){
+		//this.structureArrayList = structureArrayList;
 		ArrayList<String> structure = new ArrayList<String>(treeSet);
 		Map <String, Transformation> predicatesObjectsMap = new HashMap<String, Transformation>();
 		for(int i = 0; i < structure.size(); i++){
@@ -905,10 +923,21 @@ public class TransformationsCall {
 					predicatesObjectsMap.put(structure.get(i), TransformationConfiguration.deletePROPERTY());
 				break;
 			case EXTRACTPROPERTY: //System.out.println("EXTRACTPROPERTY");
-				predicatesObjectsMap.put(structure.get(i), TransformationConfiguration.extractPROPERTY(TestDriver.getConfigurations().getInt(Configurations.EXTRACT_PROPERTY)));
+				//if(!getObjectPropertiesCollection().contains(structure.get(i))){
+					predicatesObjectsMap.put(structure.get(i), TransformationConfiguration.extractPROPERTY(TestDriver.getConfigurations().getInt(Configurations.EXTRACT_PROPERTY)));
+				//}
+				//else{
+				//	i--;
+				//}
 				break;
 			case AGGREGATEPROPERTY: //System.out.println("AGGREGATEPROPERTY");
-				predicatesObjectsMap.put(structure.get(i), TransformationConfiguration.aggregatePROPERTIES(worker));
+				//if(!getObjectPropertiesCollection().contains(structure.get(i))){
+					//System.out.println("AGGREGATEPROPERTY");
+					predicatesObjectsMap.put(structure.get(i), TransformationConfiguration.aggregatePROPERTIES(worker));
+				//}
+				//else{
+				//	i--;
+				//}
 				break;
 			case NOTRANSFORMATION:
 				break;
@@ -919,6 +948,7 @@ public class TransformationsCall {
 	
 	
 	public Map <String, Transformation> semanticsAwareCases(TreeSet<String> treeSet){
+		//this.semanticsAwareArrayList = semanticsAwareArrayList;
 		ArrayList<String> semantics = new ArrayList<String>(treeSet);
 		
 		Map <String, Transformation> predicatesObjectsMap = new HashMap<String, Transformation>();
@@ -1029,6 +1059,7 @@ public class TransformationsCall {
 	}
 	
 	public Map <String, Transformation> complexSemanticsAwareCases(TreeSet<String> treeSet){
+		//this.semanticsAwareArrayList = semanticsAwareArrayList;
 		ArrayList<String> semantics = new ArrayList<String>(treeSet);
 		
 		Map <String, Transformation> predicatesObjectsMap = new HashMap<String, Transformation>();
@@ -1145,10 +1176,12 @@ public class TransformationsCall {
 						predicatesObjectsMapTemp = valueCases(getComplexValueStructureTree()); 
 						if(!predicatesObjectsMapTemp.values().isEmpty()) value = (Transformation) predicatesObjectsMapTemp.values().toArray()[0];
 						transformation.add(value);
+						//System.out.println("value "+value.toString());
 						do{
 							predicatesObjectsMapTemp = structureCases(getComplexValueStructureTree());
 							if(!predicatesObjectsMapTemp.values().isEmpty()){
 								structure = (Transformation) predicatesObjectsMapTemp.values().toArray()[0];
+								//System.out.println("structure "+structure.toString());
 								transformation.add(structure);
 							}
 						}while(structure==null || !structure.getClass().getName().contains("Extract") && !structure.getClass().getName().contains("Aggregate"));
@@ -1156,7 +1189,7 @@ public class TransformationsCall {
 					}
 					break;
 				case VALUE_SEMANTICS_AWARE:
-					//System.out.println("VALUE_SEMANTICS_AWARE");
+//					System.out.println("VALUE_SEMANTICS_AWARE");
 					ArrayList<String> listVSE = new ArrayList<String>();
 					listVSE.addAll(getComplexValueSemanticsTree());
 					
@@ -1173,7 +1206,7 @@ public class TransformationsCall {
 								//System.out.println("semanticsAware "+semanticsAware.toString());
 								transformation.add(semanticsAware);
 							}
-						}while(semanticsAware==null);
+						}while(semanticsAware==null /*|| semanticsAware.getClass().getName().contains("SameAs") || semanticsAware.getClass().getName().contains("DifferentFrom") || semanticsAware.getClass().getName().contains("SameAsOnExistingInstances")*/);
 						if(transformation.size() == 2) complexPredicatesObjectsMap.put(listVSE.get(i), transformation);		
 					}
 					break;

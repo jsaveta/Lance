@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 public class CleanZeros {
 public static ArrayList<Integer> indexes = new ArrayList<Integer>();
+//TODO FIX THIS! array index out of bounds!!! maybe because of zeros?!?!
+//so we cannot calculate specific weights etc...
     public static double[][] cleanZeroRows(double[][] matrix) {
         //first find those that need to delete
-    	 System.out.println("matrix[0].length  "+matrix[0].length);
-         System.out.println("matrix.length "+matrix.length);
+    	// System.out.println("matrix[0].length  "+matrix[0].length);
+       //  System.out.println("matrix.length "+matrix.length);
          write(matrix);
         boolean[] deleteThese = new boolean[matrix.length];
         int count = 0;
@@ -45,13 +47,31 @@ public static ArrayList<Integer> indexes = new ArrayList<Integer>();
                 }
                
             }
-            System.out.println("newMatrix[0].length  "+newMatrix[0].length);
-            System.out.println("newMatrix.length "+newMatrix.length);
+  //          System.out.println("newMatrix[0].length  "+newMatrix[0].length);
+  //          System.out.println("newMatrix.length "+newMatrix.length);
             write(newMatrix);
             return newMatrix;
         }
     }
 
+//    /**
+//     * expects N\nM\ne1 e2 e3 e4 e5 e6 e7...
+//     * @param in 
+//     * @return
+//     */
+//    private static double[][] read(InputStream in) {
+//        Scanner scan = new Scanner(in);
+//        int rows = scan.nextInt();
+//        int cols = scan.nextInt();
+//        double[][] matrix = new double[rows][cols];
+//        for(int i=0;i<rows;i++){
+//            for(int j=0;j<cols;j++){
+//                matrix[i][j] = scan.nextDouble();
+//            }           
+//        }
+//        return matrix;
+//    }
+//
     private static void write(double[][] matrix) {
         int rows = matrix.length;
         int cols = matrix[0].length;

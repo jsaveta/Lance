@@ -138,10 +138,13 @@ public static ArrayList<Double> calculateSpecificTransfWeights(ArrayList<ArrayLi
 	Iterator<String> iteratorGS = S.keySet().iterator();
 	while (iteratorGS.hasNext()) {
 		 String key = iteratorGS.next().toString();
-	     	 for(int i = 0; i < finalGS_.size(); i++) {   
+	     //System.out.println("key : " + key);
+	    	 for(int i = 0; i < finalGS_.size(); i++) {   
 	    			ArrayList<Object> in = finalGS_.get(i);
 	    			if(in.contains(key)){
-		     	 		Map<String,Double> value = S.get(key);
+		     	 		//System.out.println("in key " + in.toString());
+
+			     		Map<String,Double> value = S.get(key);
 					    Iterator<String> internalIteratorGS = value.keySet().iterator();
 					    String internalKey = internalIteratorGS.next().toString();
 					    cos = value.get(internalKey);
@@ -151,6 +154,7 @@ public static ArrayList<Double> calculateSpecificTransfWeights(ArrayList<ArrayLi
 		        			 M[j][k] = (Double) ((Integer)in.get(k)*1.0);
 		           		}
 		        		j++;
+		        	//System.out.println("cos " + cos);
 		     		Y.add(cos);
 				    cos = 0.0;
 	     			}
@@ -198,18 +202,41 @@ public static ArrayList<Double> calculateSpecificTransfWeights(ArrayList<ArrayLi
 //	OLSMultipleLinearRegression  regression = new OLSMultipleLinearRegression();
 //	regression.newSampleData(Ytemp, transposedM);
 //	regression.setNoIntercept(false);
-//  regression.newSampleData(Ytemp, transposedM);
-//  double[] beta = regression.estimateRegressionParameters();   //////
-//  double[] c = regression.estimateRegressionParametersStandardErrors();
-//  double[] d = regression.estimateResiduals();
+//    regression.newSampleData(Ytemp, transposedM);
+//    double[] beta = regression.estimateRegressionParameters();   //////
+//    double[] c = regression.estimateRegressionParametersStandardErrors();
+//    double[] d = regression.estimateResiduals();
 //	double[][] var = regression.estimateRegressionParametersVariance();
-//  RealMatrix hat = regression.calculateHat();
-
-
+//    RealMatrix hat = regression.calculateHat();
+//    
+//    for(int b = 0; b<beta.length; b++){
+//		System.out.println("beta "+b+" :" + beta[b]);
+//		System.out.println("c "+b+" :" + c[b]);
+//		System.out.println("d "+b+" :" + d[b]);
+//
+//	}
+//
+//     for(int b = 1; b<hat.getData()[0].length; b++){
+//    	 System.out.println("hat: "+ hat.getData()[0][b]); //////////
+//     }    
+//     System.out.print("\nVAR\n");
+//     for (int i = 0; i < var.length; i++) {
+// 	    for (int j1 = 0; j1 < var[0].length; j1++) {
+// 	        System.out.print(var[i][j1] + " ");
+// 	    }
+// 	    System.out.print("\n");
+// 	}
+	
 	/*Calculate final weight*/
 	Matrix T = InverseMarray.times(Ymatrix); 
 	double[] T_array = T.getRowPackedCopy();//row or column, contain the same nums
-
+	
+//	System.out.print("\nT\n");
+//	for (int i = 0; i < T_array.length; i++) {
+//		System.out.print(T_array[i] + " ");
+//	}
+//	System.out.print("\n");
+	
 	ArrayList<Double> specificWeights = new ArrayList<Double>();
 	specificWeights.add(0,0.0);
 	specificWeights.add(1,0.0);
@@ -225,6 +252,31 @@ public static ArrayList<Double> calculateSpecificTransfWeights(ArrayList<ArrayLi
 		}
 		specificWeights.add(Math.abs(weight));
 	}
+//	for(int i = 0; i < specificWeights.size(); i++) {   
+//	    System.out.println("i: "+ i+ "  specificWeight: "+specificWeights.get(i));
+//	}
+	
+	
+//	System.out.print("Marray \n");
+//	for (int i = 0; i < Marray.length; i++) {
+//	    for (int j1 = 0; j1 < Marray[0].length; j1++) {
+//	        System.out.print(Marray[i][j1] + " ");
+//	    }
+//	    System.out.print("\n");
+//	}
+//
+//	System.out.println("Marray len " + Marray.length);
+//	System.out.println("Y len " + Y.size());
+//
+//	System.out.println("Marray columns : " + Marray.length);
+//	System.out.println("Marray rows : " + Marray[0].length);
+//
+//	System.out.println("Y matrix columns : " + Ymatrix.getColumnDimension());
+//	System.out.println("Y matrix rows : " + Ymatrix.getRowDimension());
+//
+//	System.out.println("InverseMarray columns : " + InverseMarray.getColumnDimension());
+//	System.out.println("InverseMarray rows : " + InverseMarray.getRowDimension());
+
 	return specificWeights;
 }
 
@@ -233,6 +285,10 @@ public static void writeFinalGSFiles() throws IOException, RDFParseException, RD
 	//write here detailed gs(ttl) and also simple one (txt) both wighted
 	//after finishing delete previous detailes GSs with the wrong weights
 	ArrayList<Double> weight_per_trans_ =  calculateSpecificTransfWeights(getFinalGS(),RescalStarter.getGsWeighted());
+//	 
+//	for(int i = 0; i < weight_per_trans_.size(); i++) {   
+//	    System.out.println("i: "+ i+ "  weight: "+weight_per_trans_.get(i));
+//	} 
 	File folder = new File("GoldStandards\\");
 	File[] listOfFiles = folder.listFiles();
 		for (File file_ : listOfFiles) {
@@ -288,12 +344,14 @@ public static void writeFinalGSFiles() throws IOException, RDFParseException, RD
 						    	try {
 						    		double finalWeight = 1.0 - u_uPrime_weight;//(1.0 - u_uPrime_weight);
 						    		if(finalWeight > 1.0){
+						    			//System.out.println("The weight is greater than 1.0 " + finalWeight);
 						    			finalWeight = 1.0;
 						    		}
-						    		//if((1.0 - u_uPrime_weight) < 0.0){ //we need this
-						    		//	finalWeight = 0.0;
-						    		//}
-						    		
+						    		if((1.0 - u_uPrime_weight) < 0.0){ //we need this
+						    			finalWeight = 0.0;
+						    		}
+						    		//System.out.println(u_uPrime_weight + "       ------------         " + finalWeight);
+									
 									simpleGSfile.write(IdTemp.get(0)+" "+IdTemp.get(1)+" "+finalWeight+"\n"); //made it 1- weight 
 									
 									//oaei
@@ -333,7 +391,7 @@ public static void writeFinalGSFiles() throws IOException, RDFParseException, RD
 				    	IdTemp.add(uPrime);
 				    	ResTemp.add(1);
 				    }
-					//check weight here
+					  //check weight here
 					if(st.getPredicate().toString().equals("http://www.weight")){
 						double weight = weight_per_trans_.get((indexToReplace));
 						detailedGS.add(st.getSubject(),st.getPredicate(),SesameBuilder.sesameValueFactory.createLiteral(weight),st.getContext());
@@ -388,12 +446,15 @@ return map;
 
 
 public void sortListOfLists(ArrayList < ArrayList < String >> listOfLists) {
-	Collections.sort(listOfLists, new ListOfStringsComparator());
+
+// now sort by comparing the first string of each inner list using a comparator
+Collections.sort(listOfLists, new ListOfStringsComparator());
 }
 
 public static ArrayList<Object> initializeTypeTempArray(){
 	ArrayList<Object> TypeTemp = new ArrayList<Object>();
 	TypeTemp.add(1); //extra static constant
+//so i have to calculate the T and add them at index i+1
 	for(int i=0; i < 39; i++){
 		TypeTemp.add(0);
 	}
@@ -401,6 +462,7 @@ public static ArrayList<Object> initializeTypeTempArray(){
 }
 
 public static ArrayList<ArrayList<Object>> getFinalGS(){
+	//Collections.synchronizedList(finalGS);
 	return GS; //sort this 
 }
 
@@ -451,6 +513,7 @@ public static void setTransformationsArrayList(){
 	transformationsArrayList.add("DisjointProperty"); 
 	transformationsArrayList.add("FunctionalProperty"); 
 	transformationsArrayList.add("InverseFunctionalProperty");
+	//transformationsArrayList.add("InverseOf");
 }
 }
 

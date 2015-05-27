@@ -4,7 +4,10 @@ package data;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import org.openrdf.query.MalformedQueryException;
+import org.openrdf.query.QueryEvaluationException;
 import org.openrdf.repository.Repository;
+import org.openrdf.repository.RepositoryException;
 import org.openrdf.rio.RDFHandlerException;
 import org.openrdf.rio.RDFParseException;
 
@@ -14,6 +17,7 @@ import util.TransformationsMeasurements;
 import endpoint.SparqlQueryExecuteManager;
 import generators.data.DataGenerator;
 import main.TestDriver;
+//import eu.ldbc.semanticpublishing.refdataset.DataManager;
 
 /**
  * @author jsaveta, Foundation for Research and Technology-Hellas (FORTH)
@@ -64,7 +68,7 @@ public class DataManager {
 		System.exit(0);
 	}
 
-	private void generateData() throws IOException, InterruptedException, RDFHandlerException, RDFParseException {
+	private void generateData() throws IOException, InterruptedException, RDFHandlerException, RDFParseException, RepositoryException, MalformedQueryException, QueryEvaluationException {
 		System.out.println("Retrieving source data files...");
 		long triplesPerFile = TestDriver.getConfigurations().getLong(Configurations.TRIPLES_PER_FILE);
 		String destinationPath = TestDriver.getConfigurations().getString(Configurations.SOURCE_PATH);
