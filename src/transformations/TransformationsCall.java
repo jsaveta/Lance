@@ -57,8 +57,9 @@ public class TransformationsCall {
 	public static Map<String, Collection<String>> equivalentPropertyMap;
 	public static Map<String, Collection<String>> disjointPropertyMap;
 	public static Map<String, Collection<String>> subPropertyOfMap;
-	public static Map<String, Collection<String>> inverseFunctionalPropertyMap;
+	//public static Map<String, Collection<String>> inverseFunctionalPropertyMap;
 	public static TreeSet<String> functionalProperty;
+	public static TreeSet<String> inverseFunctionalProperty;
 	
 	private Tranformation transfPerc = Tranformation.VALUE;
 	private Value valPerc = Value.BLANKCHARSADDITION;
@@ -99,7 +100,8 @@ public class TransformationsCall {
 		disjointPropertyMap = new HashMap<String,Collection<String>>();
 		subPropertyOfMap = new HashMap<String,Collection<String>>();
 		functionalProperty = new TreeSet<String>();
-		inverseFunctionalPropertyMap = new HashMap<String,Collection<String>>();
+		inverseFunctionalProperty = new TreeSet<String>();
+		//inverseFunctionalPropertyMap = new HashMap<String,Collection<String>>();
 		
 		valueTree = new TreeSet<String>();
 		structureTree = new TreeSet<String>();
@@ -138,6 +140,11 @@ public class TransformationsCall {
 			if( Definitions.semanticsAwareAllocation.getAllocationsArray().get(3) != 0.0){//System.out.println("subclassof");
 				Collection<String>  subClassesOf = loadOntologies.getSuperClasses(c,TestDriver.getConfigurations().getBoolean(Configurations.INFERENSE_SUBCLASS_SUBPROPERTY));
 				if(!subClassesOf.isEmpty()) subClassesOfMap.put(c, subClassesOf);
+//				System.out.println("c: " + c);				
+//				for (String obj : subClassesOf) {
+//					System.out.println("subClassesOf: " + obj);
+//				}
+//				
 			}
 			
 			/*equivalentclass map*/
@@ -179,11 +186,16 @@ public class TransformationsCall {
 		ArrayList<String> classPropertiesArrayList = new ArrayList<String>();
 		System.out.println("is ClassesCollection empty?  " + getClassesCollection().isEmpty());
 		for(String c : getClassesCollection()){
+//			System.out.println("retieved class " +c);
+//			System.out.println("retieving properties");
 			try {
 				classPropertiesArrayList.addAll(loadOntologies.getClassProperties(c));
+//				System.out.println("is classPropertiesArrayList empty?  " + classPropertiesArrayList.isEmpty());
 			} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) { e.printStackTrace();} 
 		}
 			for(String p : classPropertiesArrayList){
+//				System.out.println("properties : " + p);
+				//TODO check queries!!! 
 				/*subPropertyOf map*/
 				if( Definitions.semanticsAwareAllocation.getAllocationsArray().get(8) != 0.0){//System.out.println("subPropertyOf");
 					Collection<String> subPropertyOf = new HashSet<>();
@@ -193,6 +205,11 @@ public class TransformationsCall {
 						e.printStackTrace();
 					}
 					if(!subPropertyOfMap.containsKey(p) && !subPropertyOf.isEmpty()) subPropertyOfMap.put(p, subPropertyOf);
+//					System.out.println("p: " + p);
+//					
+//					for (String obj : subPropertyOf) {
+//						System.out.println("subPropertyOf: " + obj);
+//					}
 				}
 				
 				/*equivalentProperty map*/
@@ -224,13 +241,7 @@ public class TransformationsCall {
 				
 				/*inverseFunctionalProperty map*/
 				if( Definitions.semanticsAwareAllocation.getAllocationsArray().get(12) != 0.0){//System.out.println("inverseFunctionalProperty");
-					Collection<String> inverseFunctionalProperty = new HashSet<>();
-					try {
-						inverseFunctionalProperty = loadOntologies.getInverseFunctionalProperties(p);
-					} catch (RepositoryException | MalformedQueryException | QueryEvaluationException e) {
-						e.printStackTrace();
-					}
-					if(!inverseFunctionalPropertyMap.containsKey(p)  && !inverseFunctionalProperty.isEmpty()) inverseFunctionalPropertyMap.put(p, inverseFunctionalProperty);
+					inverseFunctionalProperty.addAll(loadOntologies.getInverseFunctionalProperties());
 				}
 			  }
 			}
@@ -1029,7 +1040,7 @@ public class TransformationsCall {
 				}
 				break;
 			case INVERSEFUNCTIONALPROPERTY: //System.out.println("INVERSEFUNCTIONALPROPERTY ");
-				if(inverseFunctionalPropertyMap.containsKey(semantics.get(i))){
+				if(inverseFunctionalProperty.contains(semantics.get(i))){
 					predicatesObjectsMap.put(semantics.get(i), TransformationConfiguration.INVERSEFUNCTIONALPROPERTY(worker));
 				}
 				else{
@@ -1085,7 +1096,7 @@ public class TransformationsCall {
 				}
 				break;
 			case INVERSEFUNCTIONALPROPERTY: //System.out.println("INVERSEFUNCTIONALPROPERTY ");
-				if(inverseFunctionalPropertyMap.containsKey(semantics.get(i))){
+				if(inverseFunctionalProperty.contains(semantics.get(i))){
 					predicatesObjectsMap.put(semantics.get(i), TransformationConfiguration.INVERSEFUNCTIONALPROPERTY(worker));
 				}
 				else{

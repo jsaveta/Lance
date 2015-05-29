@@ -3,15 +3,18 @@ package transformations.semanticsAware;
 
 import generators.data.AbstractAsynchronousWorker;
 import generators.data.sesamemodelbuilders.SesameBuilder;
+import main.TestDriver;
 
 import org.openrdf.model.Literal;
 import org.openrdf.model.Model;
 import org.openrdf.model.Statement;
 import org.openrdf.model.impl.LinkedHashModel;
 
+import properties.Configurations;
 import transformations.InvalidTransformation;
 import transformations.Transformation;
 import transformations.TransformationsCall;
+import util.RandomUtil;
 
 
 
@@ -38,10 +41,13 @@ public class InverseFunctionalProperty implements Transformation{
 		Model model = new LinkedHashModel();
 				
 	    if(arg instanceof Statement){
-	    	if(TransformationsCall.inverseFunctionalPropertyMap.containsKey(s.getPredicate().stringValue())){
+	    	if(TransformationsCall.inverseFunctionalProperty.contains(s.getPredicate().stringValue())){
 	    		if(!(s.getObject() instanceof Literal)){
-		    		int index = (int)(Math.random()*(TransformationsCall.inverseFunctionalPropertyMap.get(s.getPredicate().stringValue()).toArray().length-1));
-		    		model.add(SesameBuilder.sesameValueFactory.createURI(s.getObject().stringValue()), SesameBuilder.sesameValueFactory.createURI(TransformationsCall.inverseFunctionalPropertyMap.get(s.getPredicate().stringValue()).toArray()[index].toString()),SesameBuilder.sesameValueFactory.createURI(s.getSubject().stringValue()),s.getContext());
+//		    		int index = (int)(Math.random()*(TransformationsCall.inverseFunctionalProperty.get(s.getPredicate().stringValue()).toArray().length-1));
+//		    		model.add(SesameBuilder.sesameValueFactory.createURI(s.getObject().stringValue()), SesameBuilder.sesameValueFactory.createURI(TransformationsCall.inverseFunctionalPropertyMap.get(s.getPredicate().stringValue()).toArray()[index].toString()),SesameBuilder.sesameValueFactory.createURI(s.getSubject().stringValue()),s.getContext());
+	    			RandomUtil ru = new RandomUtil();
+		    		String newObject = TestDriver.getConfigurations().getString(Configurations.NEW_URI_NAMESPACE) + ru.randomChars(30);
+					model.add(SesameBuilder.sesameValueFactory.createURI(s.getObject().stringValue()),s.getPredicate(),SesameBuilder.sesameValueFactory.createURI(newObject),s.getContext());
 	    		}
 	    	}
 //	    	else{
