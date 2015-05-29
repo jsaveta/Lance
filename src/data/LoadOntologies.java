@@ -455,36 +455,32 @@ public class LoadOntologies extends DataManager{
  	    return allObjectProperties;
     }
     
-    public Collection<String> getAllDatatypeProperties(){
-
-        Set<String> allDatatypeProperties=new HashSet<>();
-    	//check if property is datatype property (literal)
-        URI rangeOfUri = this.repository.getValueFactory().createURI(rangeAsText);
-        URI literalUri = this.repository.getValueFactory().createURI(literalAsText);
-        try{
-            RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, literalUri, false,schemaContext);
-            while(results.hasNext()){
-            	allDatatypeProperties.add(results.next().getSubject().stringValue());
-            }
-            repoConn.close();
-        }catch(RepositoryException ex){
-            
-        }
-
-        URI typeOfUri=this.repository.getValueFactory().createURI(typeOfUriAsText);
-        URI datatypeProperyUri=this.repository.getValueFactory().createURI(owlDatatypeProperyUriAsText);
-        try{
-            RepositoryConnection repoConn=this.repository.getConnection();
-            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, datatypeProperyUri, false,schemaContext);
-            while(results.hasNext()){
-            	allDatatypeProperties.add(results.next().getSubject().stringValue());
-            }
-            repoConn.close();
-        }catch(RepositoryException ex){
-            
-        }
-        return allDatatypeProperties;
+    public Collection<String> getAllDatatypeProperties() throws RepositoryException, MalformedQueryException, QueryEvaluationException{
+    	Set<String> allDatatypeProperties=new HashSet<>();
+        
+ 		RepositoryConnection con = this.repository.getConnection();
+ 		try{
+ 			  TupleQuery allClassPropertiesQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, 
+ 					  "SELECT ?p "
+ 					  	+"WHERE {?p  a  owl:DatatypeProperty  .}");
+ 				 		
+ 			  		
+ 			   TupleQueryResult allClassPropertiesResult = allClassPropertiesQuery.evaluate();
+ 			   try {
+ 			      while (allClassPropertiesResult.hasNext()) {
+ 			         BindingSet bindingSet = allClassPropertiesResult.next();
+ 			         Value name = bindingSet.getValue("p");
+ 			        allDatatypeProperties.add(name.toString());
+ 			      }
+ 			   }
+ 			   finally {
+ 				   allClassPropertiesResult.close();
+ 			   }
+ 			}
+ 			finally {
+ 			   con.close();
+ 			}
+ 	    return allDatatypeProperties;
     }
     
     public Collection<String> getSubPropertyOf( String startingProperty, boolean useInference) {
