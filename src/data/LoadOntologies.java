@@ -423,46 +423,8 @@ public class LoadOntologies extends DataManager{
 			finally {
 			   con.close();
 			}
-//		for (String s : allRdfProperties) {
-//		    System.out.println("datatype prop : " +s);
-//		}
+	return allRdfProperties;
 
-	    return allRdfProperties;
-        
-        //check if property is object property
-//        URI rangeOfUri = this.repository.getValueFactory().createURI(rangeAsText);
-//
-//        try{
-//            RepositoryConnection repoConn=this.repository.getConnection();
-//            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, null, false,schemaContext);
-//            while(results.hasNext()){
-//            	Statement tempResult = results.next();
-//            	//if range is rdf:resource literal means that is an datatype property
-//            	if(tempResult.getObject().stringValue().equals(literalAsText) || tempResult.getObject().stringValue().equals(stringAsText)){
-//            		allRdfProperties.add(tempResult.getSubject().stringValue());
-//            	}
-//            }
-//            repoConn.close();
-//        }catch(RepositoryException ex){
-//            
-//        }
-//        
-//        URI typeOfUri=this.repository.getValueFactory().createURI(typeOfUriAsText);
-//		URI rdfProperyUri=this.repository.getValueFactory().createURI(rdfProperyUriAsText);
-//		try{
-//		    RepositoryConnection repoConn=this.repository.getConnection();
-//		    RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, rdfProperyUri, false,schemaContext);
-//		    while(results.hasNext()){
-//		    	allRdfProperties.add(results.next().getSubject().stringValue());
-//		    }
-//		    repoConn.close();
-//		}catch(RepositoryException ex){
-//		    
-//		}
-//		for (String s : allRdfProperties) {
-//		    System.out.println("datatype prop : " +s);
-//		}
-//		return allRdfProperties;
     }
     
     public Collection<String> getAllObjectProperties() throws RepositoryException, MalformedQueryException, QueryEvaluationException{
@@ -490,44 +452,7 @@ public class LoadOntologies extends DataManager{
  			finally {
  			   con.close();
  			}
-// 		for (String s : allObjectProperties) {
-// 		    System.out.println("obj prop : " +s);
-// 		}
-
  	    return allObjectProperties;
-         
-//        Set<String> allObjectProperties=new HashSet<>();
-//        //check if property is object property
-//        URI rangeOfUri = this.repository.getValueFactory().createURI(rangeAsText);
-//
-//        try{
-//            RepositoryConnection repoConn=this.repository.getConnection();
-//            RepositoryResult<Statement> results=repoConn.getStatements(null, rangeOfUri, null, false,schemaContext);
-//            while(results.hasNext()){
-//            	Statement tempResult = results.next();
-//            	//if range is not rdf:resource literal means that is an object property
-//            	if(!tempResult.getObject().stringValue().equals(literalAsText)){
-//            		allObjectProperties.add(tempResult.getSubject().stringValue());
-//            	}
-//            }
-//            repoConn.close();
-//        }catch(RepositoryException ex){
-//            
-//        }
-//        
-//        URI typeOfUri=this.repository.getValueFactory().createURI(typeOfUriAsText);
-//		URI objectProperyUri=this.repository.getValueFactory().createURI(owlObjectProperyUriAsText);
-//		try{
-//		    RepositoryConnection repoConn=this.repository.getConnection();
-//		    RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, objectProperyUri, false,schemaContext);
-//		    while(results.hasNext()){
-//		    	allObjectProperties.add(results.next().getSubject().stringValue());
-//		    }
-//		    repoConn.close();
-//		}catch(RepositoryException ex){
-//		    
-//		}
-//		return allObjectProperties;
     }
     
     public Collection<String> getAllDatatypeProperties(){
@@ -604,24 +529,8 @@ public class LoadOntologies extends DataManager{
 			   con.close();
 			}
 	    return superProperties;
-//        Set<String> superProperties=new HashSet<>();
-//        URI subPropertyUri=this.repository.getValueFactory().createURI(this.subPropertyOfUriAsText);
-//        URI propertyUri=this.repository.getValueFactory().createURI(startingProperty);
-//        try{
-//            RepositoryConnection repoConn=this.repository.getConnection();
-//            RepositoryResult<Statement> results=repoConn.getStatements(propertyUri, subPropertyUri, null, useInference);
-//            while(results.hasNext()){
-//            	String superProperty = results.next().getSubject().stringValue();
-//            	if(!superProperty.equals(startingProperty)) superProperties.add(superProperty);
-//            }
-//            repoConn.close();
-//        }catch(RepositoryException ex){
-//            ex.printStackTrace();
-//        }
-//        return superProperties;
     }
     
-  //TODO : check this method (haven't check this due to the poor test ontology) 
     public Collection<String> getDisjointProperties(String startingProperty) throws RepositoryException, QueryEvaluationException, MalformedQueryException{
     	Set<String> disjointProperties = new HashSet<>();
     	RepositoryConnection con = this.repository.getConnection();
@@ -666,31 +575,7 @@ public class LoadOntologies extends DataManager{
 			   con.close();
 			}
 	    return disjointProperties;
-//        Set<String> disjointProperties = new HashSet<>();
-//        URI disjointPropertyUri = this.repository.getValueFactory().createURI(this.disjointPropertyUriAsText);
-//	    URI propertyUri = this.repository.getValueFactory().createURI(startingProperty);
-//        try{
-//            RepositoryConnection repoConn=this.repository.getConnection();
-//            RepositoryResult<Statement> results=repoConn.getStatements(null, disjointPropertyUri, propertyUri,false);
-//            while(results.hasNext()){
-//            	disjointProperties.add(results.next().getSubject().stringValue());
-//            }
-//            repoConn.close();
-//        }catch(RepositoryException ex){
-//            ex.printStackTrace();
-//        }
-//        
-//        try{
-//            RepositoryConnection repoConn=this.repository.getConnection();
-//            RepositoryResult<Statement> results=repoConn.getStatements(propertyUri, disjointPropertyUri,null ,false);
-//            while(results.hasNext()){
-//            	disjointProperties.add(results.next().getObject().stringValue());
-//            }
-//            repoConn.close();
-//        }catch(RepositoryException ex){
-//            ex.printStackTrace();
-//        }
-//    return disjointProperties;
+
     }
     
     
@@ -770,35 +655,9 @@ public class LoadOntologies extends DataManager{
 			   con.close();
 			}
 	    return equivalentProperties;
-//        Set<String> equivalentProperties = new HashSet<>();
-//        URI equivalentPropertyUri = this.repository.getValueFactory().createURI(this.equivalentPropertyUriAsText);
-//	    URI propertyUri = this.repository.getValueFactory().createURI(startingProperty);
-//        try{
-//            RepositoryConnection repoConn=this.repository.getConnection();
-//            RepositoryResult<Statement> results=repoConn.getStatements(null, equivalentPropertyUri, propertyUri,false);
-//            while(results.hasNext()){
-//            	equivalentProperties.add(results.next().getSubject().stringValue());
-//            }
-//            repoConn.close();
-//        }catch(RepositoryException ex){
-//            ex.printStackTrace();
-//        }
-//        
-//        try{
-//            RepositoryConnection repoConn=this.repository.getConnection();
-//            RepositoryResult<Statement> results=repoConn.getStatements(propertyUri, equivalentPropertyUri, null,false);
-//            while(results.hasNext()){
-//            	equivalentProperties.add(results.next().getObject().stringValue());
-//            }
-//            repoConn.close();
-//        }catch(RepositoryException ex){
-//            ex.printStackTrace();
-//        }
-//    return equivalentProperties;
     }
     
-
-  //TODO : check this method (haven't check this due to  the poor test ontology) 
+ 
     public Collection<String> getFunctionalProperties(){
         Set<String> functionalProperties = new HashSet<>();
         URI functionalPropertyUri = this.repository.getValueFactory().createURI(this.functionalPropertyUriAsText);
@@ -815,54 +674,23 @@ public class LoadOntologies extends DataManager{
         }
     return functionalProperties;
     }
-    
-  //TODO : check this method (haven't check this due to  the poor test ontology) 
-    public Collection<String> getInverseFunctionalProperties(String startingProperty) throws RepositoryException, MalformedQueryException, QueryEvaluationException{
-    	
-    	Set<String> inverseFunctionalProperties = new HashSet<>();
-    	RepositoryConnection con = this.repository.getConnection();
-		try{
-			  TupleQuery inverseFunctionalPropertiesQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, "SELECT ?p  FROM <"+endpointUrl+"/ontologies>"
-					  	+"WHERE {?p <"+inverseFunctionalPropertyUriAsText+"> <"+startingProperty+">   .}");
-			  
-			   TupleQueryResult inverseFunctionalPropertiesResult = inverseFunctionalPropertiesQuery.evaluate();
-			   try {
-			      while (inverseFunctionalPropertiesResult.hasNext()) {
-			         BindingSet bindingSet = inverseFunctionalPropertiesResult.next();
-			         Value name = bindingSet.getValue("p");
-			         inverseFunctionalProperties.add(name.toString());
-			      }
-			   }
-			   finally {
-				   inverseFunctionalPropertiesResult.close();
-			   }
-			}
-			finally {
-			   con.close();
-			}
-		
-		con = this.repository.getConnection();
-		try{
-			  TupleQuery inverseFunctionalPropertiesQuery = con.prepareTupleQuery(QueryLanguage.SPARQL, "SELECT ?p  FROM <"+endpointUrl+"/ontologies>"
-					  	+"WHERE {<"+startingProperty+"> <"+inverseFunctionalPropertyUriAsText+"> ?p   .}");
-			  
-			   TupleQueryResult inverseFunctionalPropertiesResult = inverseFunctionalPropertiesQuery.evaluate();
-			   try {
-			      while (inverseFunctionalPropertiesResult.hasNext()) {
-			         BindingSet bindingSet = inverseFunctionalPropertiesResult.next();
-			         Value name = bindingSet.getValue("p");
-			         inverseFunctionalProperties.add(name.toString());
-			      }
-			   }
-			   finally {
-				   inverseFunctionalPropertiesResult.close();
-			   }
-			}
-			finally {
-			   con.close();
-			}
+  public Collection<String> getInverseFunctionalProperties() throws RepositoryException, MalformedQueryException, QueryEvaluationException{
+        Set<String> inverseFunctionalProperties = new HashSet<>();
+        URI inverseFunctionalPropertyUri = this.repository.getValueFactory().createURI(this.inverseFunctionalPropertyUriAsText);
+        URI typeOfUri=this.repository.getValueFactory().createURI(typeOfUriAsText);
+        try{
+            RepositoryConnection repoConn=this.repository.getConnection();
+            RepositoryResult<Statement> results=repoConn.getStatements(null, typeOfUri, inverseFunctionalPropertyUri,false,schemaContext);
+            while(results.hasNext()){
+            	inverseFunctionalProperties.add(results.next().getSubject().stringValue());
+            }
+            repoConn.close();
+        }catch(RepositoryException ex){
+            ex.printStackTrace();
+        }
 		return inverseFunctionalProperties;
     }
+
 
     /************************INSTANCES*************************/
    
