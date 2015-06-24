@@ -23,7 +23,7 @@ public class NameStyleAbbreviation implements DataValueTransformation {
 	
 	private int format;
 	
-	private int surnames;
+	private int surnames = 5;
 	
 	/*
 	 * surnames is the number of surnames that is foreseen
