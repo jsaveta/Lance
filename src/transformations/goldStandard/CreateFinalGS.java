@@ -13,9 +13,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.openrdf.model.Model;
 import org.openrdf.model.Statement;
@@ -45,6 +47,11 @@ public class CreateFinalGS {
 	 private static String exactmatch = "http://www.w3.org/2004/02/skos/core#exactMatch";
 	 public static double MACHEPS = 2E-16;
 	 private static ArrayList<String> transformationsArrayList;
+	 private static String tsvfile = "weights.csv";
+	 private static Map<String, Integer> weightFrequence = new HashMap<String, Integer>();
+	 private static BufferedWriter tsvBw;
+
+		
 	 
 	 public CreateFinalGS(){}
 	 
@@ -131,6 +138,21 @@ public static List<ArrayList<Object>> GSScores(String file_) throws IOException,
 
 
 public static ArrayList<Double> calculateSpecificTransfWeights(ArrayList<ArrayList<Object>>finalGS_, Map<String, Map<String, Double>> S) throws RDFParseException, RDFHandlerException, IOException{
+	tsvBw = new BufferedWriter(new FileWriter(new File(tsvfile),true));
+	//initialize weightFrequence
+	weightFrequence.put("0.00 - 0.10", 0);
+	weightFrequence.put("0.11 - 0.20", 0);
+	weightFrequence.put("0.21 - 0.30", 0);
+	weightFrequence.put("0.31 - 0.40", 0);
+	weightFrequence.put("0.41 - 0.50", 0);
+	weightFrequence.put("0.51 - 0.60", 0);
+	weightFrequence.put("0.61 - 0.70", 0);
+	weightFrequence.put("0.71 - 0.80", 0);
+	weightFrequence.put("0.81 - 0.90", 0);
+	weightFrequence.put("0.91 - 1.00", 0);
+	
+	
+	
 	ArrayList<Double> Y = new ArrayList<Double>();
 	double[][] M = new double[RescalStarter.getSArrayList().size()][40];
 	int j = 0;
@@ -250,13 +272,17 @@ public static ArrayList<Double> calculateSpecificTransfWeights(ArrayList<ArrayLi
 		else{
 			weight = T_array[i - zeroIndexes];//regression.residuals(i - zeroIndexes);   <-------------
 		}
-		specificWeights.add(Math.abs(weight));
+		
+		Double w = Math.abs(weight);
+		specificWeights.add(w);
+		
+		
 	}
 //	for(int i = 0; i < specificWeights.size(); i++) {   
 //	    System.out.println("i: "+ i+ "  specificWeight: "+specificWeights.get(i));
 //	}
-	
-	
+//	
+//	
 //	System.out.print("Marray \n");
 //	for (int i = 0; i < Marray.length; i++) {
 //	    for (int j1 = 0; j1 < Marray[0].length; j1++) {
@@ -342,17 +368,53 @@ public static void writeFinalGSFiles() throws IOException, RDFParseException, RD
 					    		finalGS.add(TypeTemp);
 					    		
 						    	try {
-						    		double finalWeight = 1.0 - u_uPrime_weight;//(1.0 - u_uPrime_weight);
+						    		Double finalWeight = 1.0 - u_uPrime_weight;//(1.0 - u_uPrime_weight);
 						    		if(finalWeight > 1.0){
 						    			//System.out.println("The weight is greater than 1.0 " + finalWeight);
 						    			finalWeight = 1.0;
 						    		}
-						    		if((1.0 - u_uPrime_weight) < 0.0){ //we need this
+						    		if(finalWeight < 0.0){ //we need this
 						    			finalWeight = 0.0;
 						    		}
 						    		//System.out.println(u_uPrime_weight + "       ------------         " + finalWeight);
 									
 									simpleGSfile.write(IdTemp.get(0)+" "+IdTemp.get(1)+" "+finalWeight+"\n"); //made it 1- weight 
+									//tsv file with weight frequence
+									writeTSVFile(tsvBw,finalWeight.toString());
+									
+									
+									if(finalWeight <= 0.10){
+										weightFrequence.put("0.00 - 0.10", weightFrequence.get("0.00 - 0.10")+1);
+									}
+									else if(finalWeight <= 0.20){
+										weightFrequence.put("0.11 - 0.20", weightFrequence.get("0.11 - 0.20")+1);
+									}
+									else if(finalWeight <= 0.30){
+										weightFrequence.put("0.21 - 0.30", weightFrequence.get("0.21 - 0.30")+1);
+									}
+									else if(finalWeight <= 0.40){
+										weightFrequence.put("0.31 - 0.40", weightFrequence.get("0.31 - 0.40")+1);
+									}
+									else if(finalWeight <= 0.50){
+										weightFrequence.put("0.41 - 0.50", weightFrequence.get("0.41 - 0.50")+1);
+									}
+									else if(finalWeight <= 0.60){
+										weightFrequence.put("0.51 - 0.60", weightFrequence.get("0.51 - 0.60")+1);
+									}
+									else if(finalWeight <= 0.70){
+										weightFrequence.put("0.61 - 0.70", weightFrequence.get("0.61 - 0.70")+1);
+									}
+									else if(finalWeight <= 0.80){
+										weightFrequence.put("0.71 - 0.80", weightFrequence.get("0.71 - 0.80")+1);
+									}
+									else if(finalWeight <= 0.90){
+										weightFrequence.put("0.81 - 0.90", weightFrequence.get("0.81 - 0.90")+1);
+									}
+									else if(finalWeight <= 1.0){
+										weightFrequence.put("0.91 - 1.00", weightFrequence.get("0.91 - 1.00")+1);
+									}
+									
+									
 									
 									//oaei
 									try {
@@ -424,10 +486,19 @@ public static void writeFinalGSFiles() throws IOException, RDFParseException, RD
 				throw new UnsupportedRDFormatException("UnsupportedRDFormatException : "+ e.getMessage());
 			}
 		    file_.delete();
+		   
 		    }
 
 	}
-		
+	
+	TreeMap<String, Integer>weightFrequenceTree = new TreeMap<String, Integer>(weightFrequence);
+	writeTSVFile(tsvBw,"name,frequency");
+	for (String key : weightFrequenceTree.keySet()) {
+	    //System.out.println("Key: " + key + ", Value: " + weightFrequenceTree.get(key));
+	    writeTSVFile(tsvBw, key + "	" + weightFrequenceTree.get(key));
+	}
+	tsvBw.close();	
+
 }
 
 
@@ -515,6 +586,14 @@ public static void setTransformationsArrayList(){
 	transformationsArrayList.add("InverseFunctionalProperty");
 	//transformationsArrayList.add("InverseOf");
 }
+
+
+	private static void writeTSVFile(BufferedWriter bw, String finalWeight) throws IOException{
+		bw.write(finalWeight.toString());
+		bw.write("\t");
+		//bw.close();
+	}
+
 }
 
 

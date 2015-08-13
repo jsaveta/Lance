@@ -32,6 +32,12 @@ public class AllocationsUtil {
 		this.random = random;
 		calculateLimitsFromAllocations(allocations);
 	}
+	
+	public AllocationsUtil(double[] allocations) {
+		this.limits = new double[allocations.length];
+		this.allocation = new ArrayList<Double>();
+		calculateLimitsFromAllocations(allocations);
+	}
 
 	private void calculateLimitsFromAllocations(double[] allocations) {
 		double limitsRange = 0.0;

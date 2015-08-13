@@ -1,5 +1,7 @@
 package transformations.structure;
 
+import generators.data.AbstractAsynchronousWorker;
+
 import org.openrdf.model.Literal;
 import org.openrdf.model.Model;
 import org.openrdf.model.Statement;
@@ -38,7 +40,7 @@ public class ExtractProperty  implements Transformation{
 				        URI predicate = sesameValueFactory.createURI((arg.getPredicate().stringValue() + Integer.toString(i)));
 						Value object = sesameValueFactory.createLiteral(parts[i]);
 						model.add(arg.getSubject(), predicate ,object,arg.getContext());
-						
+						AbstractAsynchronousWorker.addToextendOntologyProps(predicate.toString()); 
 				    }
 		    	}
 		    	//else{ model.add(st);}

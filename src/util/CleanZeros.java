@@ -10,7 +10,7 @@ public static ArrayList<Integer> indexes = new ArrayList<Integer>();
         //first find those that need to delete
     	// System.out.println("matrix[0].length  "+matrix[0].length);
        //  System.out.println("matrix.length "+matrix.length);
-         write(matrix);
+
         boolean[] deleteThese = new boolean[matrix.length];
         int count = 0;
 
@@ -49,7 +49,6 @@ public static ArrayList<Integer> indexes = new ArrayList<Integer>();
             }
   //          System.out.println("newMatrix[0].length  "+newMatrix[0].length);
   //          System.out.println("newMatrix.length "+newMatrix.length);
-            write(newMatrix);
             return newMatrix;
         }
     }

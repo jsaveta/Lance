@@ -1,5 +1,7 @@
 package transformations.value;
 
+import java.util.Arrays;
+
 import org.openrdf.model.Model;
 import org.openrdf.model.Statement;
 
@@ -23,7 +25,7 @@ public class NameStyleAbbreviation implements DataValueTransformation {
 	
 	private int format;
 	
-	private int surnames = 5;
+	private int surnames = 4;
 	
 	/*
 	 * surnames is the number of surnames that is foreseen
@@ -88,6 +90,7 @@ public class NameStyleAbbreviation implements DataValueTransformation {
 		while(stop > 0){
 			buffer += tokens[tokens.length - stop--] + " ";
 		}
+
 		return buffer.trim();
 	}
 

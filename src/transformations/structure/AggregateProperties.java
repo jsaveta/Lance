@@ -45,9 +45,10 @@ public class AggregateProperties implements Transformation{
 				if(it.hasNext()){
 					st = it.next();
 					if(!arg.getPredicate().stringValue().equals(st.getPredicate().stringValue())){
-		    			Value o = SesameBuilder.sesameValueFactory.createLiteral( arg.getObject().stringValue()+ " " + st.getObject().stringValue());
+		    			Value o = SesameBuilder.sesameValueFactory.createLiteral( arg.getObject().stringValue()+ "" + st.getObject().stringValue());
 		    			URI p =  SesameBuilder.sesameValueFactory.createURI( arg.getPredicate().stringValue()+ st.getPredicate().stringValue().replace(st.getPredicate().getNamespace(), ""));
 		    			model.add(st.getSubject(), (URI)p,(Value)o, st.getContext());
+		    			AbstractAsynchronousWorker.addToextendOntologyProps(p.toString()); 
 					}
 				}
 			}

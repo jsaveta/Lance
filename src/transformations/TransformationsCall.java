@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
@@ -61,6 +62,7 @@ public class TransformationsCall {
 	public static TreeSet<String> functionalProperty;
 	public static TreeSet<String> inverseFunctionalProperty;
 	
+	
 	private Tranformation transfPerc = Tranformation.VALUE;
 	private Value valPerc = Value.BLANKCHARSADDITION;
 	private Structure structPerc = Structure.ADDPROPERTY;
@@ -102,6 +104,7 @@ public class TransformationsCall {
 		functionalProperty = new TreeSet<String>();
 		inverseFunctionalProperty = new TreeSet<String>();
 		//inverseFunctionalPropertyMap = new HashMap<String,Collection<String>>();
+	
 		
 		valueTree = new TreeSet<String>();
 		structureTree = new TreeSet<String>();
@@ -184,7 +187,7 @@ public class TransformationsCall {
 			
 		/*properties*/
 		ArrayList<String> classPropertiesArrayList = new ArrayList<String>();
-		System.out.println("is ClassesCollection empty?  " + getClassesCollection().isEmpty());
+//		System.out.println("is ClassesCollection empty?  " + getClassesCollection().isEmpty());
 		for(String c : getClassesCollection()){
 //			System.out.println("retieved class " +c);
 //			System.out.println("retieving properties");
@@ -1171,38 +1174,47 @@ public class TransformationsCall {
 						transformation = new ArrayList<Transformation>();	
 						predicatesObjectsMapTemp = valueCases(getComplexValueStructureTree()); 
 						if(!predicatesObjectsMapTemp.values().isEmpty()) value = (Transformation) predicatesObjectsMapTemp.values().toArray()[0];
-						transformation.add(value);
+						if(value != null) transformation.add(value);
 						//System.out.println("value "+value.toString());
-						do{
+						
 							predicatesObjectsMapTemp = structureCases(getComplexValueStructureTree());
 							if(!predicatesObjectsMapTemp.values().isEmpty()){
+								do{
 								structure = (Transformation) predicatesObjectsMapTemp.values().toArray()[0];
+								if(structure.toString().contains("Add")){
+									structure = TransformationConfiguration.aggregatePROPERTIES(worker);
+								}
+								if(structure.toString().contains("Delete")){
+									structure = TransformationConfiguration.extractPROPERTY(TestDriver.getConfigurations().getInt(Configurations.EXTRACT_PROPERTY));
+								}
 								//System.out.println("structure "+structure.toString());
 								transformation.add(structure);
+								}while(structure==null);
+								
 							}
-						}while(structure==null || !structure.getClass().getName().contains("Extract") && !structure.getClass().getName().contains("Aggregate"));
 						if(transformation.size() == 2) complexPredicatesObjectsMap.put(listVST.get(i), transformation);
 					}
 					break;
 				case VALUE_SEMANTICS_AWARE:
-//					System.out.println("VALUE_SEMANTICS_AWARE");
+					//System.out.println("VALUE_SEMANTICS_AWARE");
 					ArrayList<String> listVSE = new ArrayList<String>();
 					listVSE.addAll(getComplexValueSemanticsTree());
-					
 					for(int i = 0; i < listVSE.size(); i++){
 						transformation = new ArrayList<Transformation>();
 						predicatesObjectsMapTemp = valueCases(getComplexValueSemanticsTree()); 
 						if(!predicatesObjectsMapTemp.values().isEmpty()) value = (Transformation) predicatesObjectsMapTemp.values().toArray()[0];
-						transformation.add(value);  
+						if(value != null) transformation.add(value);  
 						//System.out.println("value "+value.toString());
-						do{
+						
 							predicatesObjectsMapTemp = complexSemanticsAwareCases(getComplexValueSemanticsTree()); 
 							if(!predicatesObjectsMapTemp.values().isEmpty()){
-								semanticsAware = (Transformation) predicatesObjectsMapTemp.values().toArray()[0];
-								//System.out.println("semanticsAware "+semanticsAware.toString());
-								transformation.add(semanticsAware);
+								do{
+									semanticsAware = (Transformation) predicatesObjectsMapTemp.values().toArray()[0];
+									//System.out.println("semanticsAware "+semanticsAware.toString());
+									transformation.add(semanticsAware);
+								}while(semanticsAware==null /*|| semanticsAware.getClass().getName().contains("SameAs") || semanticsAware.getClass().getName().contains("DifferentFrom") || semanticsAware.getClass().getName().contains("SameAsOnExistingInstances")*/);
 							}
-						}while(semanticsAware==null /*|| semanticsAware.getClass().getName().contains("SameAs") || semanticsAware.getClass().getName().contains("DifferentFrom") || semanticsAware.getClass().getName().contains("SameAsOnExistingInstances")*/);
+						
 						if(transformation.size() == 2) complexPredicatesObjectsMap.put(listVSE.get(i), transformation);		
 					}
 					break;

@@ -12,12 +12,15 @@ import java.io.FileOutputStream;
 
 public class Logger {
     private static String logFile = "msglog.txt";
+    private static String tsvLogFile = "msglog.tsv";
     private final static DateFormat df = new SimpleDateFormat ("yyyy.MM.dd  hh:mm:ss ");
     
     public Logger() {
-    	File file = new File("msglog.txt");
+    	File file = new File(logFile);
+    	File tsvFile = new File(tsvLogFile);
     	try{
     		new FileOutputStream(file, false);
+    		new FileOutputStream(tsvFile, false);
     	}catch (IOException e) {
     		e.printStackTrace();
     	}
@@ -42,7 +45,14 @@ public class Logger {
     public static void write(Exception e) {
         write(logFile, stack2string(e));
     }
-
+    public static void writeTsv(String msg) {
+        write(tsvLogFile, msg);
+    }
+    
+    public static void writeTsv(Exception e) {
+        write(tsvLogFile, stack2string(e));
+    }
+    
     public static void write(String file, String msg) {
         try {
             Date now = new Date();
