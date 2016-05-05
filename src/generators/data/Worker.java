@@ -151,7 +151,9 @@ public class Worker extends AbstractAsynchronousWorker{
 										"CONSTRUCT {?s ?p ?o}"
 										 + "FROM <"+endpointUrl+"/datasets> " 
 										 + "WHERE {?s  a  <"+c+"> ."
-										 		+ "?s ?p ?o .}"
+										 		+ "?s ?p ?o . + "
+										 		+ "FILTER (!isBlank(?s) && !isBlank(?o))"
+										 	+ "}"
 										 + "ORDER BY ASC (?s)"
 										 + "LIMIT "+TestDriver.getConfigurations().getInt(Configurations.TRIPLES_PER_FILE)/classes.size()
 										 + "OFFSET "+(TestDriver.getConfigurations().getInt(Configurations.TRIPLES_PER_FILE)*offset)/classes.size()).evaluate();
@@ -169,17 +171,15 @@ public class Worker extends AbstractAsynchronousWorker{
 					graphResult = con.prepareGraphQuery(QueryLanguage.SPARQL, 
 					   "CONSTRUCT {?s ?p ?o}"
 					   + "FROM <"+endpointUrl+"/datasets> " 
-					   + "WHERE {?s ?p ?o }"
+					   + "WHERE {?s ?p ?o . "
+					   + "FILTER (!isBlank(?s) && !isBlank(?o))"
+					   + "}"
 					   + "ORDER BY ASC (?s)"
 					   + "LIMIT "+TestDriver.getConfigurations().getInt(Configurations.TRIPLES_PER_FILE)
 					   + "OFFSET "+(TestDriver.getConfigurations().getInt(Configurations.TRIPLES_PER_FILE)*(currentFilesCount-1))).evaluate();
 					
 					resultsModel = QueryResults.asModel(graphResult);
 					}
-					
-			   		//TODO check if the limit and the offset cut an instance
-			   		// also if the instances are in the same form as given datasets !!!!!!!!!!!!
-
 			   		
 					try{
 					    sourceSesameModel = new LinkedHashModel();
